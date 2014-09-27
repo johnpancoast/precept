@@ -8,8 +8,6 @@
 
 namespace Shideon\Bundle\SmeeApiBundle\Model;
 
-namespace Shideon\Bundle\SmeeApiBundle\EventListenerInterface;
-
 /**
  * Base business object class
  *
@@ -43,11 +41,22 @@ class Model
     /**
      * Raise event
      *
-     * @param  string $eventName Event name
+     * @param  string                                    $eventName Event name
+     * @param  \Shideon\Bundle\SmeeApiBundle\Model\Event $event     Event object
+     * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
      * @return void
      */
-    protected function raiseEvent($eventName)
+    protected function raiseEvent($eventName, $event, &$reference)
     {
-        // TODO
+        if (!isset($this->eventListeners[$eventName])) {
+            return;
+        }
+
+        // call events.
+        // note that exceptions are thrown which
+        // will hault all other events from running
+        foreach ($this->eventListeners[$eventName] as $event) {
+            $event->handleEvent($event, $reference);
+        }
     }
 }

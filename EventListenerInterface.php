@@ -15,6 +15,11 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
  */
 interface EventListenerInterface
 {
-    public function hasHandlerForEvent($eventName);
-    public function callEvent($eventName);
+    /**
+     * Handle event
+     *
+     * @param object $event Event object
+     * @param mixed $reference A reference which events can use to pass data between other events and the caller.
+     */
+    public function handleEvent($event, &$reference);
 }
