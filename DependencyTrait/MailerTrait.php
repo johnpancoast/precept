@@ -8,14 +8,12 @@
 
 namespace Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait;
 
-use \Swift_Mailer;
-
 /**
  * Mailer trait
  *
  * @author John Pancoast <shideon@gmail.com>
  */
-trait EntityManagerTrait
+trait MailerTrait
 {
     /**
      * @var \Doctrine\ORM\EntityManagerInterface Entity manager interface
@@ -31,7 +29,7 @@ trait EntityManagerTrait
      * Sets the Entity manager.
      *
      * @access public
-     * @param \Doctrine\ORM\EntityManagerInterface $entityManager Entity manager
+     * @param  \Doctrine\ORM\EntityManagerInterface $entityManager Entity manager
      * @return self
      */
     public function setEntityManager(EntityManagerInterface $entityManager)

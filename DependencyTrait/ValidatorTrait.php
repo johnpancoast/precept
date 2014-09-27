@@ -31,7 +31,7 @@ trait ValidatorTrait
      * Sets the Validator.
      *
      * @access public
-     * @param \Symfony\Component\Validator\ValidatorInterface $validator Validator
+     * @param  \Symfony\Component\Validator\ValidatorInterface $validator Validator
      * @return self
      */
     public function setValidator(\Symfony\Component\Validator\ValidatorInterface $validator)

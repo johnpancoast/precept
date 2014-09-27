@@ -19,18 +19,18 @@ namespace Shideon\Bundle\SmeeApiBundle\EventListenerInterface;
  */
 class Model
 {
-	/**
+    /**
 	 * Collection of event listeners
 	 *
 	 * @var Shideon\Bundle\SmeeApiBundle\EventListenerInterface
 	 */
-	private $eventListeners = [];
+    private $eventListeners = [];
 
     /**
      * Add event listener
      *
      * @access public
-     * @param Shideon\Bundle\SmeeApiBundle\EventListenerInterface $eventListeners Event listeners
+     * @param  Shideon\Bundle\SmeeApiBundle\EventListenerInterface $eventListeners Event listeners
      * @return self
      */
     public function addEventListener($eventName, Shideon\Bundle\SmeeApiBundle\EventListenerInterface $eventListener)
@@ -43,11 +43,11 @@ class Model
     /**
      * Raise event
      *
-     * @param string $eventName Event name
+     * @param  string $eventName Event name
      * @return void
      */
     protected function raiseEvent($eventName)
     {
-    	// TODO
+        // TODO
     }
 }

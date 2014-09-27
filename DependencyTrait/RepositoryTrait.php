@@ -8,8 +8,6 @@
 
 namespace Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait;
 
-use \Doctrine\ORM\EntityManagerInterface;
-
 /**
  * Entity dependency trait
  *
@@ -28,7 +26,7 @@ trait RepositoryTrait
      * Sets the Repository.
      *
      * @access public
-     * @param \Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface $repository Repository
+     * @param  \Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface $repository Repository
      * @return self
      */
     public function setRepository(\Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface $repository)

@@ -8,8 +8,6 @@
 
 namespace Shideon\Bundle\SmeeApiBundle\Model;
 
-use Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface;
-
 /**
  * Model repository interface
  *
@@ -17,7 +15,7 @@ use Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface;
  */
 interface RepositoryInterface
 {
-	/**
+    /**
 	 * Find entity
 	 *
 	 * @access public
@@ -25,26 +23,26 @@ interface RepositoryInterface
 	 * @param string $field Field to search (implementations should default to their "primary key")
 	 * @return object An entity object
 	 */
-	public function find($id, $field = '');
+    public function find($id, $field = '');
 
-	/**
+    /**
 	 * Find all entities
 	 *
 	 * @access public
 	 * @return mixed Collection of entities
 	 */
-	public function findAll();
+    public function findAll();
 
-	/**
+    /**
 	 * Create entity
 	 *
 	 * @access public
 	 * @param array $data Entity data
 	 * @return object Created entity
 	 */
-	public function create(array $data);
+    public function create(array $data);
 
-	/**
+    /**
 	 * Update an entity
 	 *
 	 * @access public
@@ -52,13 +50,13 @@ interface RepositoryInterface
 	 * @param array $data Entity data
 	 * @return object Updated entity
 	 */
-	public function update($id, array $data);
+    public function update($id, array $data);
 
-	/**
+    /**
 	 * Delete an entity
 	 *
 	 * @param mixed $id Id of entity to delete
 	 * @return bool Success
 	 */
-	public function delete($id);
+    public function delete($id);
 }

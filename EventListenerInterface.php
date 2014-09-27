@@ -13,8 +13,8 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
  *
  * @author John Pancoast <shideon@gmail.com>
  */
-interface EventlistenerInterface
+interface EventListenerInterface
 {
-	public function hasHandlerForEvent($eventName);
-	public function callEvent($eventName);
+    public function hasHandlerForEvent($eventName);
+    public function callEvent($eventName);
 }
