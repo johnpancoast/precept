@@ -31,7 +31,7 @@ class Event
 	 */
     public function __construct($eventData = null)
     {
-        $this->setEventData($eventData);
+        $this->setData($eventData);
     }
 
     /**
@@ -51,7 +51,7 @@ class Event
      * @param  mixed $eventData Event data
      * @return self
      */
-    public function setEventData($eventData)
+    public function setData($eventData)
     {
         $this->eventData = $eventData;
 
@@ -64,7 +64,7 @@ class Event
     * @access public
     * @return mixed
     */
-    public function getEventData()
+    public function getData()
     {
         return $this->eventData;
     }

@@ -18,8 +18,8 @@ interface EventListenerInterface
     /**
      * Handle event
      *
-     * @param object $event Event object
+     * @param Event $event     Event object
      * @param mixed $reference A reference which events can use to pass data between other events and the caller.
      */
-    public function handleEvent($event, &$reference);
+    public function handle(Event $event, &$reference);
 }

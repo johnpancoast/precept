@@ -31,7 +31,7 @@ class Model
      * @param  Shideon\Bundle\SmeeApiBundle\EventListenerInterface $eventListeners Event listeners
      * @return self
      */
-    public function addEventListener($eventName, Shideon\Bundle\SmeeApiBundle\EventListenerInterface $eventListener)
+    public function addEventListener($eventName, EventListenerInterface $eventListener)
     {
         $this->eventListeners[$eventName][] = $eventListener;
 
@@ -46,7 +46,7 @@ class Model
      * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
      * @return void
      */
-    protected function raiseEvent($eventName, $event, &$reference)
+    protected function raiseEvent($eventName, Event $event, &$reference)
     {
         if (!isset($this->eventListeners[$eventName])) {
             return;
@@ -55,8 +55,8 @@ class Model
         // call events.
         // note that exceptions are thrown which
         // will hault all other events from running
-        foreach ($this->eventListeners[$eventName] as $event) {
-            $event->handleEvent($event, $reference);
+        foreach ($this->eventListeners[$eventName] as $e) {
+            $e->handle($event, $reference);
         }
     }
 }
