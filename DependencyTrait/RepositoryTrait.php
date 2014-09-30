@@ -1,6 +1,6 @@
 <?php
 /**
- * Entity dependency trait
+ * Dependency trait - repository
  *
  * @copyright (c) 2014 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
@@ -9,7 +9,7 @@
 namespace Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait;
 
 /**
- * Entity dependency trait
+ * Dependency trait - repository
  *
  * @author John Pancoast <shideon@gmail.com>
  */

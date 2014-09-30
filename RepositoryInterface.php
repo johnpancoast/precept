@@ -8,6 +8,8 @@
 
 namespace Shideon\Bundle\SmeeApiBundle\Model;
 
+use \Shideon\Bundle\SmeeApiBundle\Model\Repository\SearchCriteria;
+
 /**
  * Model repository interface
  *
@@ -15,15 +17,24 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
  */
 interface RepositoryInterface
 {
+
     /**
-	 * Find entity
+     * Find entity(ies)
+     *
+     * @param \Shideon\Bundle\SmeeApiBundle\Model\Repository\SearchCriteria $searchCriteria The criteria for search
+     * @return mixed Collection of entities
+     */
+    public function find(SearchCriteria $searchCriteria);
+    
+    /**
+	 * Find one entity by a certain field
 	 *
 	 * @access public
 	 * @param mixed $id Entity id
 	 * @param string $field Field to search (implementations should default to their "primary key")
 	 * @return object An entity object
 	 */
-    public function find($id, $field = '');
+    public function findOne($id, $field = '');
 
     /**
 	 * Find all entities
