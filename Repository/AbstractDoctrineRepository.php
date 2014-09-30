@@ -8,6 +8,7 @@
 
 namespace Shideon\Bundle\SmeeApiBundle\Model\Repository;
 
+use \Symfony\Component\Validator\ValidatorInterface;
 use \Doctrine\ORM\EntityManager;
 
 use Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface;
@@ -22,15 +23,17 @@ use Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait as Dependency;
 abstract class AbstractDoctrineRepository implements RepositoryInterface
 {
     use Dependency\EntityManagerTrait;
+    use Dependency\ValidatorTrait;
 
     /**
      * Constructor
      *
      * @param \Doctrine\ORM\EntityManager $em Doctrine entity manager
      */
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, ValidatorInterface $validator)
     {
         $this->setEntityManager($em);
+        $this->setValidator($validator);
     }
 
     /**
