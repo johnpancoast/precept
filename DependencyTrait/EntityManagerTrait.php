@@ -28,7 +28,7 @@ trait EntityManagerTrait
      * Sets the Entity manager.
      *
      * @access public
-     * @param \Doctrine\ORM\EntityManager $entityManager Entity manager
+     * @param  \Doctrine\ORM\EntityManager $entityManager Entity manager
      * @return self
      */
     public function setEntityManager(EntityManager $entityManager)

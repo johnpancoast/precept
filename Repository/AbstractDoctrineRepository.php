@@ -11,7 +11,6 @@ namespace Shideon\Bundle\SmeeApiBundle\Model\Repository;
 use \Doctrine\ORM\EntityManager;
 
 use Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface;
-use Shideon\Bundle\SmeeApiBundle\Model\Repository\SearchCriteria;
 
 use Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait as Dependency;
 
@@ -48,6 +47,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     {
         $em = $this->getEntityManager();
         $em->getRepostiory($this->getEntity());
+
         return $em->matching($searchCriteria);
     }
 
@@ -71,6 +71,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     public function findAll()
     {
         $em = $this->getEntityManager();
+
         return $em->getRepository($this->getEntity())->findAll();
     }
 
@@ -82,7 +83,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
         $em = $this->getEntityManager();
 
         $name = $this->getEntity();
-        $entity = self::updateEntityFromArray(new $name, $data);
+        $entity = self::updateEntityFromArray(new $name(), $data);
 
         $em->persist($entity);
         $em->flush();
@@ -117,14 +118,13 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     /**
      * Update an entity with an array of data
      *
-     * @param object $entity Entity object
-     * @param array $data Array of data
+     * @param  object $entity Entity object
+     * @param  array  $data   Array of data
      * @return object Updated entity object
      */
     private static function updateEntityFromArray($entity, array $data = array())
     {
-        foreach ($data as $k => $v)
-        {
+        foreach ($data as $k => $v) {
             $k = str_replace(' ', '', ucwords(str_replace('_', ' ', $k)));
             $method = 'set'.ucfirst($k);
             $entity->{$method}($v);

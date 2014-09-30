@@ -21,11 +21,11 @@ interface RepositoryInterface
     /**
      * Find entity(ies)
      *
-     * @param \Shideon\Bundle\SmeeApiBundle\Model\Repository\SearchCriteria $searchCriteria The criteria for search
-     * @return mixed Collection of entities
+     * @param  \Shideon\Bundle\SmeeApiBundle\Model\Repository\SearchCriteria $searchCriteria The criteria for search
+     * @return mixed                                                         Collection of entities
      */
     public function find(SearchCriteria $searchCriteria);
-    
+
     /**
 	 * Find one entity by a certain field
 	 *
