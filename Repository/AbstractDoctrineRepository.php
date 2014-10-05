@@ -18,6 +18,9 @@ use Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait as Dependency;
 /**
  * Repository - doctrine
  *
+ * !!! NOTE THAT THIS CLASS WILL SOON BE DEFUNCT IN PLACE OF MONGO !!!
+ * We're leaving it in case it can still be useful.
+ *
  * @author John Pancoast <shideon@gmail.com>
  */
 abstract class AbstractDoctrineRepository implements RepositoryInterface
