@@ -18,28 +18,29 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
 class Event
 {
     /**
-	 * Event data
-	 *
-	 * @var mixed
-	 */
+     * Event data
+     *
+     * @var mixed
+     */
     private $eventData;
 
     /**
-	 * Constructor
-	 *
-	 * @param mixed $eventData Event data
-	 */
+     * Constructor
+     *
+     * @param mixed $eventData Event data
+     */
     public function __construct($eventData = null)
     {
         $this->setData($eventData);
     }
 
     /**
-	 * Simple event factory
-	 *
-	 * @access public
-	 */
-    public function build($eventData = null)
+     * Simple event factory
+     *
+     * @static
+     * @access public
+     */
+    public static function build($eventData = null)
     {
         return new self($eventData);
     }
