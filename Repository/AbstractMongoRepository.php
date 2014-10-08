@@ -8,6 +8,7 @@
 
 namespace Shideon\Bundle\SmeeApiBundle\Model\Repository;
 
+use \Doctrine\ODM\MongoDB\DocumentManager;
 use \Symfony\Component\Validator\ValidatorInterface;
 
 use Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface;
@@ -20,17 +21,17 @@ use Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait as Dependency;
  */
 abstract class AbstractMongoRepository implements RepositoryInterface
 {
-    use Dependency\EntityManagerTrait;
+    use Dependency\DocumentManagerTrait;
     use Dependency\ValidatorTrait;
 
     /**
      * Constructor
      *
-     * @param \Doctrine\ORM\EntityManager $em Doctrine entity manager
+     * @param \Doctrine\ODM\MongoDB\DocumentManager $em Doctrine entity manager
      */
-    public function __construct(EntityManager $em, ValidatorInterface $validator)
+    public function __construct(DocumentManager $dm, ValidatorInterface $validator)
     {
-        $this->setEntityManager($em);
+        $this->setDocumentManager($dm);
         $this->setValidator($validator);
     }
 
@@ -46,6 +47,7 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      */
     public function find(SearchCriteria $searchCriteria)
     {
+        // TODO
     }
 
     /**
@@ -53,6 +55,14 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      */
     public function findOne($id, $field = '')
     {
+        $dm = $this->getDocumentManager();
+
+        if (empty($field)) {
+            return $dm->getRepository($this->getEntity())->find($id);
+        } else {
+            $method = 'findOneBy'.ucfirst($field);
+            return $dm->getRepository($this->getEntity())->{$method}($id);
+        }
     }
 
     /**
@@ -60,6 +70,9 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      */
     public function findAll()
     {
+        $dm = $this->getDocumentManager();
+
+        return $dm->getRepository($this->getEntity())->findAll();
     }
 
     /**
@@ -67,6 +80,15 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      */
     public function create(array $data)
     {
+        $dm = $this->getDocumentManager();
+
+        $name = $this->getEntity();
+        $entity = self::updateEntityFromArray(new $name(), $data);
+
+        $dm->persist($entity);
+        $dm->flush();
+
+        return $entity;
     }
 
     /**
@@ -74,6 +96,18 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      */
     public function update($id, array $data)
     {
+        $dm = $this->getDocumentManager();
+
+        $entity = $dm->getRepository($this->getEntity())->find($id);
+        if (!$entity) {
+            return;
+        }
+
+        $entity = self::updateEntityFromArray($entity, $data);
+        $dm->persist($entity);
+        $dm->flush();
+
+        return $entity;
     }
 
     /**
@@ -81,6 +115,9 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      */
     public function delete($id)
     {
+        $dm = $this->getDocumentManager();
+        $dm->remove($dm->getRepository($this->getEntity())->find($id));
+        $dm->flush();
     }
 
     /**
@@ -92,5 +129,12 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      */
     private static function updateEntityFromArray($entity, array $data = array())
     {
+        foreach ($data as $k => $v) {
+            $k = str_replace(' ', '', ucwords(str_replace('_', ' ', $k)));
+            $method = 'set'.ucfirst($k);
+            $entity->{$method}($v);
+        }
+
+        return $entity;
     }
 }
