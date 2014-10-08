@@ -103,7 +103,14 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     public function update($id, array $data)
     {
         $em = $this->getEntityManager();
-        $entity = self::updateEntityFromArray($em->find($this->getEntity(), $id), $data);
+
+        $entity = $em->find($this->getEntity(), $id);
+
+        if (!$entity) {
+            return;
+        }
+
+        $entity = self::updateEntityFromArray($entity, $data);
 
         $em->persist($entity);
         $em->flush();
