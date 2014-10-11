@@ -94,7 +94,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
         $em->persist($entity);
         $em->flush();
 
-        return $entity;
+        return true;
     }
 
     /**
@@ -115,7 +115,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
         $em->persist($entity);
         $em->flush();
 
-        return $entity;
+        return true;
     }
 
     /**
