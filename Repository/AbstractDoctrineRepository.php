@@ -135,8 +135,12 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
      * @param  array  $data   Array of data
      * @return object Updated entity object
      */
-    private static function updateEntityFromArray($entity, array $data = array())
+    protected static function updateEntityFromArray($entity, array $data = array())
     {
+        if (!is_object($entity)) {
+            throw new \Exception('$entity must be an object');
+        }
+
         foreach ($data as $k => $v) {
             $k = str_replace(' ', '', ucwords(str_replace('_', ' ', $k)));
             $method = 'set'.ucfirst($k);
