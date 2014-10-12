@@ -35,5 +35,5 @@ interface ModelInterface
      * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
      * @return void
      */
-    protected function raiseEvent($eventName, Event $event, &$reference);
+    protected function emitEvent($eventName, Event $event, &$reference);
 }

@@ -38,7 +38,7 @@ class Model implements ModelInterface
     /**
      * {@inheritDoc}
      */
-    protected function raiseEvent($eventName, Event $event, &$reference)
+    protected function emitEvent($eventName, Event $event, &$reference)
     {
         if (!isset($this->eventListeners[$eventName])) {
             return;
