@@ -75,5 +75,10 @@ class Model implements ModelInterface
     {
         // leave this for the subclasses to define
     }
+
+    public function make(array $data)
+    {
+        // leave this for the subclasses to define
+    }
     */
 }

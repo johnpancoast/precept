@@ -27,6 +27,15 @@ interface ModelInterface
 	 */
 	public function load($id);
 
+	/**
+	 * Make the model via data
+	 *
+	 * @access public
+	 * @param  array $data Data to load (format defined by implemnter)
+	 * @return  void
+	 */
+	public function make(array $data);
+
     /**
      * Add event listener
      *
