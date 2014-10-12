@@ -49,7 +49,7 @@ interface RepositoryInterface
      *
      * @access public
      * @param  array $data Entity data
-     * @return bool  Success
+     * @return object Entity object
      */
     public function create(array $data);
 
@@ -59,7 +59,7 @@ interface RepositoryInterface
      * @access public
      * @param  mixed $id   Id of entity to update
      * @param  array $data Entity data
-     * @return bool  Success
+     * @return object Entity object
      */
     public function update($id, array $data);
 
