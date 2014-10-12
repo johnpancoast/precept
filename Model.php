@@ -15,7 +15,7 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
  *
  * @author John Pancoast <shideon@gmail.com>
  */
-class Model
+class Model implements ModelInterface
 {
     /**
 	 * Collection of event listeners
@@ -25,11 +25,7 @@ class Model
     private $eventListeners = [];
 
     /**
-     * Add event listener
-     *
-     * @access public
-     * @param  Shideon\Bundle\SmeeApiBundle\EventListenerInterface $eventListeners Event listeners
-     * @return self
+     * {@inheritDoc}
      */
     public function addEventListener($eventName, EventListenerInterface $eventListener)
     {
@@ -38,13 +34,9 @@ class Model
         return $this;
     }
 
+
     /**
-     * Raise event
-     *
-     * @param  string                                    $eventName Event name
-     * @param  \Shideon\Bundle\SmeeApiBundle\Model\Event $event     Event object
-     * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
-     * @return void
+     * {@inheritDoc}
      */
     protected function raiseEvent($eventName, Event $event, &$reference)
     {
