@@ -22,7 +22,7 @@ interface ModelInterface
      * Load the model via an id that the implementation searches
      *
      * @access public
-     * @param mixed $id Id of model to load
+     * @param  mixed $id Id of model to load
      * @return void
      */
     public function load($id);
@@ -31,7 +31,7 @@ interface ModelInterface
      * Load the model via an entity
      *
      * @access public
-     * @param object $entity The entity to load
+     * @param  object $entity The entity to load
      * @return void
      */
     public function loadEntity($entity);
@@ -41,7 +41,7 @@ interface ModelInterface
      *
      * @access public
      * @param  array $data Data to load (format defined by implemnter)
-     * @return  void
+     * @return void
      */
     public function make(array $data);
 

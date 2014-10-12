@@ -66,7 +66,6 @@ abstract class AbstractModel implements ModelInterface
         return $this;
     }
 
-
     /**
      * Emit event
      *
@@ -93,7 +92,7 @@ abstract class AbstractModel implements ModelInterface
     /**
      * A helper method to load models from entities and specified filds (the map)
      *
-     * @param array $map The map
+     * @param  array $map The map
      * @return void
      */
     public function loadEntityMap($entity, array $map)
@@ -101,7 +100,7 @@ abstract class AbstractModel implements ModelInterface
         $entity = is_string($entity) ? new $entity() : $entity;
 
         // change field name syntax
-        $makeFieldName = function($name) {
+        $makeFieldName = function ($name) {
             return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $name))));
         };
 
@@ -121,7 +120,7 @@ abstract class AbstractModel implements ModelInterface
      * A helper to get model data via a passed map
      *
      * @access protected
-     * @param array $map The map
+     * @param  array $map The map
      * @return array
      */
     protected function getDataMap(array $map)

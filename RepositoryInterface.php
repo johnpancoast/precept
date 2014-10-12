@@ -30,8 +30,8 @@ interface RepositoryInterface
      * Find one entity by a certain field
      *
      * @access public
-     * @param mixed $id Entity id
-     * @param string $field Field to search (implementations should default to their "primary key")
+     * @param  mixed  $id    Entity id
+     * @param  string $field Field to search (implementations should default to their "primary key")
      * @return object An entity object
      */
     public function findOne($id, $field = '');
@@ -48,8 +48,8 @@ interface RepositoryInterface
      * Create entity
      *
      * @access public
-     * @param array $data Entity data
-     * @return bool Success
+     * @param  array $data Entity data
+     * @return bool  Success
      */
     public function create(array $data);
 
@@ -57,9 +57,9 @@ interface RepositoryInterface
      * Update an entity
      *
      * @access public
-     * @param mixed $id Id of entity to update
-     * @param array $data Entity data
-     * @return bool Success
+     * @param  mixed $id   Id of entity to update
+     * @param  array $data Entity data
+     * @return bool  Success
      */
     public function update($id, array $data);
 
@@ -67,8 +67,8 @@ interface RepositoryInterface
      * Delete an entity
      *
      * @access public
-     * @param mixed $id Id of entity to delete
-     * @return bool Success
+     * @param  mixed $id Id of entity to delete
+     * @return bool  Success
      */
     public function delete($id);
 
@@ -76,8 +76,8 @@ interface RepositoryInterface
      * Make and return an entity object
      *
      * @access public
-     * @param string $name The name of the entity to make (some repositories deal with multiple entities). This method allows for consistent API.
-     * @param array $data The data to make the entity with
+     * @param  string $name The name of the entity to make (some repositories deal with multiple entities). This method allows for consistent API.
+     * @param  array  $data The data to make the entity with
      * @return object Entity object
      */
     public function make($name, array $data);

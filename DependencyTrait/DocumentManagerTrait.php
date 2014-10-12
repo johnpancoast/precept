@@ -28,7 +28,7 @@ trait DocumentManagerTrait
      * Sets the Entity manager.
      *
      * @access public
-     * @param \Doctrine\ODM\MongoDB\DocumentManager $documentManager Entity manager
+     * @param  \Doctrine\ODM\MongoDB\DocumentManager $documentManager Entity manager
      * @return self
      */
     public function setDocumentManager(DocumentManager $documentManager)

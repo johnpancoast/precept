@@ -131,7 +131,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     /**
      * {@inheritDoc}
      *
-     * Note that this expects the child to define 
+     * Note that this expects the child to define
      * methods to make entities for each called name
      * E.g.,
      * name = 'foo'
@@ -146,6 +146,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     {
         $name = str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
         $method = 'make'.$name.'Entity';
+
         return $this->{$method}($data);
     }
 
@@ -154,10 +155,10 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
      *
      * @static
      * @access protected
-     * @param  object $entity Entity object
-     * @param  array  $data   Array of data
-     * @param array $map The fields to use in data
-     * @param array $required Required fields
+     * @param  object $entity   Entity object
+     * @param  array  $data     Array of data
+     * @param  array  $map      The fields to use in data
+     * @param  array  $required Required fields
      * @return object Updated entity object
      */
     protected static function updateEntity($entity, array $data, array $map = [], array $required = [])

@@ -61,6 +61,7 @@ abstract class AbstractMongoRepository implements RepositoryInterface
             return $dm->getRepository($this->getEntity())->find($id);
         } else {
             $method = 'findOneBy'.ucfirst($field);
+
             return $dm->getRepository($this->getEntity())->{$method}($id);
         }
     }
