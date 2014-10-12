@@ -35,14 +35,4 @@ interface ModelInterface
      * @return self
      */
     public function addEventListener($eventName, EventListenerInterface $eventListener);
-
-    /**
-     * Emit event
-     *
-     * @param  string                                    $eventName Event name
-     * @param  \Shideon\Bundle\SmeeApiBundle\Model\Event $event     Event object
-     * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
-     * @return void
-     */
-    public function emitEvent($eventName, Event $event, &$reference);
 }

@@ -36,9 +36,15 @@ class Model implements ModelInterface
 
 
     /**
-     * {@inheritDoc}
+     * Emit event
+     *
+     * @access protected
+     * @param  string                                    $eventName Event name
+     * @param  \Shideon\Bundle\SmeeApiBundle\Model\Event $event     Event object
+     * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
+     * @return void
      */
-    public function emitEvent($eventName, Event $event, &$reference)
+    protected function emitEvent($eventName, Event $event, &$reference)
     {
         if (!isset($this->eventListeners[$eventName])) {
             return;
