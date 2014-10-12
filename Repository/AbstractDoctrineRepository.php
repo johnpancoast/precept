@@ -179,7 +179,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
 
         foreach ($loop as $k => $v) {
             $key = !is_int($k) ? $k : $v;
-            
+
             if (!isset($data[$key])) {
                 continue;
             }
@@ -187,29 +187,6 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
             $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
             $entity->{$method}($data[$key]);
         }
-
-        return $entity;
-    }
-
-    /**
-     * A helper method to hydrate an entity with provided data
-     *
-     * @static
-     * @access public
-     * @param object $entity An entity object
-     * @param array $data The data to create entity with
-     * @param array $requiredData Required data
-     * @return object The hydrated entity
-     */
-    public static function hydrateEntity($entity, array $data, array $requiredData = array())
-    {
-        $makeMethodName = function($name) {
-            return 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
-        };
-
-        foreach ($data as $k => $v) {
-            $entity->{$makeMethodName($k)}($v);
-        } 
 
         return $entity;
     }
