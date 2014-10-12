@@ -19,8 +19,19 @@ abstract class AbstractModel implements ModelInterface
 {
     use DependencyTrait\RepositoryTrait;
 
-    // TODO - docblocks
+    /**
+     * {@inheritDoc}
+     */
     abstract public function load($id);
+
+    /**
+     * {@inheritDoc}
+     */
+    abstract public function loadEntity($entity);
+
+    /**
+     * {@inheritDoc}
+     */
     abstract public function make(array $data);
 
     /**
@@ -80,19 +91,20 @@ abstract class AbstractModel implements ModelInterface
      * @param array $map The map
      * @return void
      */
-    public function loadFromMap($entity, array $map)
+    public function loadEntityMap($entity, array $map)
     {
-        $makeMethod = function($name) {
+        $entity = is_string($entity) ? new $entity() : $entity;
+
+        // change field name syntax
+        $makeFieldName = function($name) {
             return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $name))));
         };
-
-        $entity = is_string($entity) ? new $entity() : $entity;
 
         foreach ($map as $k => $v) {
             $assoc = is_int($k);
 
             $field = $assoc ? $v : $k;
-            $trueField = $assoc ? $makeMethod($v) : $makeMethod($k);
+            $trueField = $assoc ? $makeFieldName($v) : $makeFieldName($k);
             $setMethod = 'set'.ucfirst($trueField);
             $getMethod = 'get'.ucfirst($trueField);
 

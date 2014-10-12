@@ -29,6 +29,13 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     use Dependency\ValidatorTrait;
 
     /**
+     * Get entity we're working with
+     *
+     * @return string Entity object name
+     */
+    abstract public function getEntity();
+
+    /**
      * Constructor
      *
      * @param \Doctrine\ORM\EntityManager $em Doctrine entity manager
@@ -38,13 +45,6 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
         $this->setEntityManager($em);
         $this->setValidator($validator);
     }
-
-    /**
-     * Get entity we're working with
-     *
-     * @return string Entity object name
-     */
-    abstract public function getEntity();
 
     /**
      * {@inheritDoc}
@@ -89,7 +89,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
         $em = $this->getEntityManager();
 
         $name = $this->getEntity();
-        $entity = self::updateEntityFromArray(new $name(), $data);
+        $entity = self::updateEntity(new $name(), $data);
 
         $em->persist($entity);
         $em->flush();
@@ -110,7 +110,7 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
             return;
         }
 
-        $entity = self::updateEntityFromArray($entity, $data);
+        $entity = self::updateEntity($entity, $data);
 
         $em->persist($entity);
         $em->flush();
@@ -129,23 +129,87 @@ abstract class AbstractDoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * {@inheritDoc}
+     *
+     * Note that this expects the child to define 
+     * methods to make entities for each called name
+     * E.g.,
+     * name = 'foo'
+     * method = makeFooEntity()
+     *
+     * name = 'fooBar'
+     * -or-
+     * name = 'foo_bar'
+     * method = makeFooBarEntity()
+     */
+    public function make($name, array $data)
+    {
+        $name = str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
+        $method = 'make'.$name.'Entity';
+        return $this->{$method}($data);
+    }
+
+    /**
      * Update an entity with an array of data
      *
+     * @static
+     * @access protected
      * @param  object $entity Entity object
      * @param  array  $data   Array of data
+     * @param array $map The fields to use in data
+     * @param array $required Required fields
      * @return object Updated entity object
      */
-    protected static function updateEntityFromArray($entity, array $data = array())
+    protected static function updateEntity($entity, array $data, array $map = [], array $required = [])
     {
+        // must have entity object
         if (!is_object($entity)) {
             throw new \Exception('$entity must be an object');
         }
 
-        foreach ($data as $k => $v) {
-            $k = str_replace(' ', '', ucwords(str_replace('_', ' ', $k)));
-            $method = 'set'.ucfirst($k);
-            $entity->{$method}($v);
+        // check required fields
+        foreach ($required as $d) {
+            if (!isset($data[$d])) {
+                throw new \Exception('Entity requires field "'.$d.'" to build it');
+            }
         }
+
+        // loop map if we have it or just use passed data
+        $loop = !empty($map) ? $map : $data;
+
+        foreach ($loop as $k => $v) {
+            $key = !is_int($k) ? $k : $v;
+            
+            if (!isset($data[$key])) {
+                continue;
+            }
+
+            $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            $entity->{$method}($data[$key]);
+        }
+
+        return $entity;
+    }
+
+    /**
+     * A helper method to hydrate an entity with provided data
+     *
+     * @static
+     * @access public
+     * @param object $entity An entity object
+     * @param array $data The data to create entity with
+     * @param array $requiredData Required data
+     * @return object The hydrated entity
+     */
+    public static function hydrateEntity($entity, array $data, array $requiredData = array())
+    {
+        $makeMethodName = function($name) {
+            return 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
+        };
+
+        foreach ($data as $k => $v) {
+            $entity->{$makeMethodName($k)}($v);
+        } 
 
         return $entity;
     }

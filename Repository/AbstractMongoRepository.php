@@ -83,7 +83,7 @@ abstract class AbstractMongoRepository implements RepositoryInterface
         $dm = $this->getDocumentManager();
 
         $name = $this->getEntity();
-        $entity = self::updateEntityFromArray(new $name(), $data);
+        $entity = self::updateEntity(new $name(), $data);
 
         $dm->persist($entity);
         $dm->flush();
@@ -103,7 +103,7 @@ abstract class AbstractMongoRepository implements RepositoryInterface
             return;
         }
 
-        $entity = self::updateEntityFromArray($entity, $data);
+        $entity = self::updateEntity($entity, $data);
         $dm->persist($entity);
         $dm->flush();
 
@@ -127,7 +127,7 @@ abstract class AbstractMongoRepository implements RepositoryInterface
      * @param  array  $data   Array of data
      * @return object Updated entity object
      */
-    private static function updateEntityFromArray($entity, array $data = array())
+    private static function updateEntity($entity, array $data = array())
     {
         foreach ($data as $k => $v) {
             $k = str_replace(' ', '', ucwords(str_replace('_', ' ', $k)));

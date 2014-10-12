@@ -19,13 +19,22 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
 interface ModelInterface
 {
 	/**
-	 * Load the model via an id
+	 * Load the model via an id that the implementation searches
 	 *
 	 * @access public
 	 * @param mixed $id Id of model to load
 	 * @return void
 	 */
 	public function load($id);
+
+	/**
+	 * Load the model via an entity
+	 *
+	 * @access public
+	 * @param object $entity The entity to load
+	 * @return void
+	 */
+	public function loadEntity($entity);
 
 	/**
 	 * Make the model via data
