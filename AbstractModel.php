@@ -35,6 +35,11 @@ abstract class AbstractModel implements ModelInterface
     abstract public function make(array $data);
 
     /**
+     * {@inheritDoc}
+     */
+    abstract public function getData();
+
+    /**
      * Constructor
      *
      * @param UserRepositoryInterface $repository [description]
@@ -110,5 +115,23 @@ abstract class AbstractModel implements ModelInterface
 
             $this->{$setMethod}($entity->{$getMethod}());
         }
+    }
+
+    /**
+     * A helper to get model data via a passed map
+     *
+     * @access protected
+     * @param array $map The map
+     * @return array
+     */
+    protected function getDataMap(array $map)
+    {
+        $data = [];
+        foreach ($map as $m) {
+            $key = 'get'.str_replace(' ', '', ucwords(str_replace('_', ' ', $m)));
+            $data[$m] = $this->{$key}();
+        }
+
+        return $data;
     }
 }

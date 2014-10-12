@@ -46,6 +46,16 @@ interface ModelInterface
     public function make(array $data);
 
     /**
+     * Get a data representation of the model
+     *
+     * getData() can be considered the opposite of make()
+     * and the expected data formats of each should be the same.
+     *
+     * @return array The data
+     */
+    public function getData();
+
+    /**
      * Add event listener
      *
      * @access public
