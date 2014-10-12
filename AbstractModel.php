@@ -86,7 +86,7 @@ abstract class AbstractModel implements ModelInterface
     }
 
     /**
-     * A helper method to load entities via a map that the child defines
+     * A helper method to load models from entities and specified filds (the map)
      *
      * @param array $map The map
      * @return void
