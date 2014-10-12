@@ -51,4 +51,11 @@ class Model implements ModelInterface
             $e->handle($event, $reference);
         }
     }
+
+    /*
+    public function load($id)
+    {
+        // leave this for the subclasses
+    }
+    */
 }
