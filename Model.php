@@ -38,7 +38,7 @@ class Model implements ModelInterface
     /**
      * {@inheritDoc}
      */
-    protected function emitEvent($eventName, Event $event, &$reference)
+    public function emitEvent($eventName, Event $event, &$reference)
     {
         if (!isset($this->eventListeners[$eventName])) {
             return;
@@ -55,7 +55,7 @@ class Model implements ModelInterface
     /*
     public function load($id)
     {
-        // leave this for the subclasses
+        // leave this for the subclasses to define
     }
     */
 }
