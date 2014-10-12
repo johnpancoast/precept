@@ -17,6 +17,18 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
  */
 class Model implements ModelInterface
 {
+    use DependencyTrait\RepositoryTrait;
+
+    /**
+     * Constructor
+     *
+     * @param UserRepositoryInterface $repository [description]
+     */
+    public function __construct(RepositoryInterface $repository)
+    {
+        $this->setRepository($repository);
+    }
+
     /**
 	 * Collection of event listeners
 	 *
