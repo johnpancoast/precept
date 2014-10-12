@@ -15,9 +15,13 @@ namespace Shideon\Bundle\SmeeApiBundle\Model;
  *
  * @author John Pancoast <shideon@gmail.com>
  */
-class Model implements ModelInterface
+abstract class AbstractModel implements ModelInterface
 {
     use DependencyTrait\RepositoryTrait;
+
+    // TODO - docblocks
+    abstract public function load($id);
+    abstract public function make(array $data);
 
     /**
      * Constructor
@@ -70,15 +74,29 @@ class Model implements ModelInterface
         }
     }
 
-    /*
-    public function load($id)
+    /**
+     * A helper method to load entities via a map that the child defines
+     *
+     * @param array $map The map
+     * @return void
+     */
+    public function loadFromMap($entity, array $map)
     {
-        // leave this for the subclasses to define
-    }
+        $makeMethod = function($name) {
+            return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $name))));
+        };
 
-    public function make(array $data)
-    {
-        // leave this for the subclasses to define
+        $entity = is_string($entity) ? new $entity() : $entity;
+
+        foreach ($map as $k => $v) {
+            $assoc = is_int($k);
+
+            $field = $assoc ? $v : $k;
+            $trueField = $assoc ? $makeMethod($v) : $makeMethod($k);
+            $setMethod = 'set'.ucfirst($trueField);
+            $getMethod = 'get'.ucfirst($trueField);
+
+            $this->{$setMethod}($entity->{$getMethod}());
+        }
     }
-    */
 }
