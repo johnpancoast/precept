@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\DependencyTrait;
+namespace Deta\Model\DependencyTrait;
 
 use \Doctrine\ODM\MongoDB\DocumentManager;
 

@@ -6,14 +6,14 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Repository;
+namespace Deta\Model\Repository;
 
 use \Symfony\Component\Validator\ValidatorInterface;
 use \Doctrine\ORM\EntityManager;
 
-use Deta\RepositoryInterface;
+use Deta\Model\RepositoryInterface;
 
-use Deta\DependencyTrait as Dependency;
+use Deta\Model\DependencyTrait as Dependency;
 
 /**
  * Repository - doctrine
