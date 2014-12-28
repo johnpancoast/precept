@@ -1,6 +1,6 @@
 {
     "name": "shideon/deta",
-    "description": "Simple abstractions for creating business logic",
+    "description": "A small PHP library for organizing a model layer",
     "authors": [
         {
             "name": "John Pancoast",
