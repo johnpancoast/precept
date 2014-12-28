@@ -1,0 +1,16 @@
+{
+    "name": "shideon/deta",
+    "description": "Simple abstractions for creating business logic",
+    "authors": [
+        {
+            "name": "John Pancoast",
+            "email": "shideon@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": { "Deta\\": "src" }
+    }
+}

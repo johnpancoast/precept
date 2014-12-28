@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model\Repository;
+namespace Deta\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 

@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait;
+namespace Deta\DependencyTrait;
 
 use \Doctrine\ORM\EntityManager;
 

@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model;
+namespace Deta;
 
 /**
  * Base business object class
@@ -71,7 +71,7 @@ abstract class AbstractModel implements ModelInterface
      *
      * @access protected
      * @param  string                                    $eventName Event name
-     * @param  \Shideon\Bundle\SmeeApiBundle\Model\Event $event     Event object
+     * @param  \Deta\Event $event     Event object
      * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
      * @return void
      */

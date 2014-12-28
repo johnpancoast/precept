@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait;
+namespace Deta\DependencyTrait;
 
 /**
  * Dependency trait - repository
@@ -18,7 +18,7 @@ trait RepositoryTrait
     /**
      * Repository
      *
-     * @var \Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface
+     * @var \Deta\RepositoryInterface
      */
     private $repository;
 
@@ -26,10 +26,10 @@ trait RepositoryTrait
      * Sets the Repository.
      *
      * @access public
-     * @param  \Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface $repository Repository
+     * @param  \Deta\RepositoryInterface $repository Repository
      * @return self
      */
-    public function setRepository(\Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface $repository)
+    public function setRepository(\Deta\RepositoryInterface $repository)
     {
         $this->repository = $repository;
 
@@ -40,7 +40,7 @@ trait RepositoryTrait
     * Gets the Repository.
     *
     * @access public
-    * @return \Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface
+    * @return \Deta\RepositoryInterface
     */
     public function getRepository()
     {

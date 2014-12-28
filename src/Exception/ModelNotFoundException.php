@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model\Exception;
+namespace Deta\Exception;
 
 /**
  * No model found

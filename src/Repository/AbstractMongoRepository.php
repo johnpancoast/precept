@@ -6,13 +6,13 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model\Repository;
+namespace Deta\Repository;
 
 use \Doctrine\ODM\MongoDB\DocumentManager;
 use \Symfony\Component\Validator\ValidatorInterface;
 
-use Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface;
-use Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait as Dependency;
+use Deta\RepositoryInterface;
+use Deta\DependencyTrait as Dependency;
 
 /**
  * Repository - mongo

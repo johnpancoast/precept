@@ -6,9 +6,9 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model;
+namespace Deta;
 
-use \Shideon\Bundle\SmeeApiBundle\Model\Repository\SearchCriteria;
+use \Deta\Repository\SearchCriteria;
 
 /**
  * Model repository interface
@@ -21,7 +21,7 @@ interface RepositoryInterface
     /**
      * Find entity(ies)
      *
-     * @param  \Shideon\Bundle\SmeeApiBundle\Model\Repository\SearchCriteria $searchCriteria The criteria for search
+     * @param  \Deta\Repository\SearchCriteria $searchCriteria The criteria for search
      * @return mixed                                                         Collection of entities
      */
     public function find(SearchCriteria $searchCriteria);

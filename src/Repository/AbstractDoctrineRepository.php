@@ -6,14 +6,14 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Shideon\Bundle\SmeeApiBundle\Model\Repository;
+namespace Deta\Repository;
 
 use \Symfony\Component\Validator\ValidatorInterface;
 use \Doctrine\ORM\EntityManager;
 
-use Shideon\Bundle\SmeeApiBundle\Model\RepositoryInterface;
+use Deta\RepositoryInterface;
 
-use Shideon\Bundle\SmeeApiBundle\Model\DependencyTrait as Dependency;
+use Deta\DependencyTrait as Dependency;
 
 /**
  * Repository - doctrine
