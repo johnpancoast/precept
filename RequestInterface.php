@@ -18,11 +18,11 @@ namespace Shideon\BloxBundle;
 interface RequestInterface
 {
     /**
-     * Set response
-     * @param mixed $input The type depends on implementation.
+     * Set request input
+     * @param array $input
      * @return self
      */
-    public function setInput($input);
+    public function setInput(array $input = array());
 
     /**
      * Get an input value by key
