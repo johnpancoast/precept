@@ -107,7 +107,7 @@ class Application implements ApplicationInterface
     private function setState($state)
     {
         // TODO validation on states that are considered opposites (since we allow bitwise
-        // and some statuses are considered opposites).
+        // some statuses can theoretically be set at the same time when they shouldn't be).
 
         $this->state = $state;
         return $this;
