@@ -47,6 +47,15 @@ class Application implements ApplicationInterface
     }
 
     /**
+     * Simple factory that allows chaining
+     * @return Application
+     */
+    public static function factory()
+    {
+        return new self();
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function setRequest(RequestInterface $request)
@@ -58,17 +67,21 @@ class Application implements ApplicationInterface
     /**
      * {@inheritDoc}
      */
-    public function process()
+    public function invokeModel(callable $modelCallable)
     {
         // TODO Emit before event
+        // TODO Call before hooks
 
         // logic
         // TODO add something significant
-        $this->setState(State::SUCCESS & State::FAILURE & State::INIT);
+        $this->setState(State::SUCCESS);
         $this->response = new Response();
         $this->response->setMessage('Sweet Jesus');
 
+        // TODO Call after hooks
         // TODO Emit after event
+
+        return $this;
     }
 
     /**

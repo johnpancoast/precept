@@ -31,16 +31,16 @@ interface ApplicationInterface
     public function setRequest(RequestInterface $request);
 
     /**
-     * Process request
+     * Invoke a model callable.
      *
      * This is the application's core logic which should execute
      * the passed model action and setting state along the way and
      * setting a response for retrieval later.
      *
-     * @param callable $modelAction The model action to invoke
+     * @param callable $modelCallable The model action to invoke
      * @return void
      */
-    public function process();
+    public function invokeModel(callable $modelCallable);
 
     /**
      * Get application response
