@@ -7,7 +7,7 @@
  */
 
 namespace Shideon\BloxBundle;
-:
+
 /**
  * Response interface
  *
