@@ -18,11 +18,6 @@ namespace Shideon\BloxBundle;
 class Application implements ApplicationInterface
 {
     /**
-     * @var callable Model actionModelInterface The model we'll be invoking.:
-     */
-    private $action;
-
-    /**
      * Request object.
      * @var Request|null
      */
