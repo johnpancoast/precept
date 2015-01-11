@@ -38,4 +38,16 @@ interface ImmutableResponseInterface
      * @return mixed
      */
     public function getMessage();
+
+    /**
+     * Get exception
+     * @return \Exception
+     */
+    public function getException();
+
+    /**
+     * Get the response that came from the model
+     * @return ModelResponseInterface
+     */
+    public function getModelResponse();
 }

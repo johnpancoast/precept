@@ -45,4 +45,20 @@ class ImmutableResponse implements ImmutableResponseInterface
     {
         return $this->response->getMessage();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getException()
+    {
+        return $this->response->getException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getModelResponse()
+    {
+        return $this->response->getModelResponse();
+    }
 }

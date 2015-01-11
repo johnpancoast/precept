@@ -9,33 +9,52 @@
 namespace Shideon\BloxBundle;
 
 /**
- * Response
+ * Model response
  *
  * @package blox-bundle
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
  */
-class Response implements ResponseInterface
+class ModelResponse implements ModelResponseInterface
 {
     /**
-     * @var mixed Application state at time of response.
+     * @var int Model state constant(s) (bit logic)
      */
     private $state;
 
     /**
-     * @var mixed $message Response message
+     * @var string Model message
      */
     private $message;
 
     /**
-     * @var \Exception|null Exception (if applicable)
+     * @var \Exception|null Exceptions from model if applicable
      */
     private $exception;
 
     /**
-     * @var ModelResponseInterface
+     * Constructor
+     * @param $state
+     * @param $message
+     * @param \Exception|null $exception
      */
-    private $modelResponse;
+    public function __construct($state, $message, \Exception $exception = null)
+    {
+        $this->setState($state);
+        $this->setMessage($message);
+
+        if ($exception) {
+            $this->setException($exception);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 
     /**
      * {@inheritDoc}
@@ -49,9 +68,9 @@ class Response implements ResponseInterface
     /**
      * {@inheritDoc}
      */
-    public function getState()
+    public function getMessage()
     {
-        return $this->state;
+        return $this->message;
     }
 
     /**
@@ -66,39 +85,17 @@ class Response implements ResponseInterface
     /**
      * {@inheritDoc}
      */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Set exception (if applicaple)
-     * @param \Exception $e
-     * @return mixed
-     */
-    public function setException(\Exception $e)
-    {
-        $this->exception = $e;
-        return $this;
-    }
-
-    /**
-     * Get exception
-     * @return \Exception
-     */
     public function getException()
     {
         return $this->exception;
     }
 
-    public function setModelResponse(ModelResponseInterface $modelResponse)
+    /**
+     * {@inheritDoc}
+     */
+    public function setException(\Exception $e)
     {
-        $this->modelResponse = $modelResponse;
+        $this->exception = $e;
         return $this;
-    }
-
-    public function getModelResponse()
-    {
-        return $this->modelResponse;
     }
 }

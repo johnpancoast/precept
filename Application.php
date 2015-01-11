@@ -7,6 +7,7 @@
  */
 
 namespace Shideon\BloxBundle;
+use Shideon\BloxBundle\Exception\NoModelResponseException;
 
 /**
  * Application
@@ -24,7 +25,7 @@ class Application implements ApplicationInterface
     private $request;
 
     /**
-     * @var Response|null
+     * @var Response
      */
     private $response;
 
@@ -36,9 +37,9 @@ class Application implements ApplicationInterface
     /**
      * {@inheritDoc
      */
-    public function __consruct(callable $modelAction)
+    public function __construct()
     {
-        $this->action = $modelAction;
+        $this->response = new Response();
     }
 
     /**
@@ -64,17 +65,27 @@ class Application implements ApplicationInterface
      */
     public function invokeModel(callable $modelCallable)
     {
-        // TODO Emit before event
-        // TODO Call before hooks
+        try {
+            // TODO Emit before event
+            // TODO Call before hooks
 
-        // logic
-        // TODO add something significant
-        $this->setState(ApplicationState::SUCCESS);
-        $this->response = new Response();
-        $this->response->setMessage('Sweet Jesus');
+            // core logic
+            $modelResponse = call_user_func($modelCallable);
+            if (!($modelResponse instanceof ModelResponseInterface)) {
+                throw new NoModelResponseException();
+            }
 
-        // TODO Call after hooks
-        // TODO Emit after event
+            $this->setState(ApplicationState::SUCCESS);
+            $this->response->setModelResponse($modelResponse);
+            $this->response->setMessage('Success');
+
+            // TODO Call after hooks
+            // TODO Emit after event
+        } catch (\Exception $e) {
+            $this->setState(ApplicationState::FAILURE);
+            $this->response->setMessage('Exception: '.$e->getMessage());
+            $this->response->setException($e);
+        }
 
         return $this;
     }

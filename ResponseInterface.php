@@ -42,4 +42,30 @@ interface ResponseInterface
      * @return mixed
      */
     public function getMessage();
+
+    /**
+     * Set exception (if applicaple)
+     * @param \Exception $e
+     * @return mixed
+     */
+    public function setException(\Exception $e);
+
+    /**
+     * Get exception
+     * @return \Exception
+     */
+    public function getException();
+
+    /**
+     * Set the response that came from model
+     * @param ModelResponseInterface $modelResponse
+     * @return self
+     */
+    public function setModelResponse(ModelResponseInterface $modelResponse);
+
+    /**
+     * Get the response that came from the model
+     * @return ModelResponseInterface
+     */
+    public function getModelResponse();
 }

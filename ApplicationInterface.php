@@ -21,7 +21,7 @@ interface ApplicationInterface
      * Constructor
      * @param callable $modelAction
      */
-    public function __consruct(callable $modelAction);
+    public function __construct();
 
     /**
      * Set request
