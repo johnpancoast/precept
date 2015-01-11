@@ -19,13 +19,12 @@ use Shideon\BloxBundle\Exception\NoModelResponseException;
 class Application implements ApplicationInterface
 {
     /**
-     * Request object.
-     * @var Request|null
+     * @var Request|null Request object
      */
     private $request;
 
     /**
-     * @var Response
+     * @var Response|null Response object
      */
     private $response;
 
@@ -107,6 +106,9 @@ class Application implements ApplicationInterface
      */
     private function setState($state)
     {
+        // TODO validation on states that are considered opposites (since we allow bitwise
+        // and some statuses are considered opposites).
+
         $this->state = $state;
         return $this;
     }
