@@ -29,7 +29,7 @@ interface ImmutableResponseInterface
 
     /**
      * Get application state
-     * @return mixed Can be bit logic. See states in {@link State}
+     * @return mixed Can be bit logic. See states in {@link ApplicationState}
      */
     public function getState();
 

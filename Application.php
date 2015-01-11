@@ -36,7 +36,7 @@ class Application implements ApplicationInterface
     /**
      * @var mixed
      */
-    private $state = State::INIT;
+    private $state = ApplicationState::INIT;
 
     /**
      * {@inheritDoc
@@ -74,7 +74,7 @@ class Application implements ApplicationInterface
 
         // logic
         // TODO add something significant
-        $this->setState(State::SUCCESS);
+        $this->setState(ApplicationState::SUCCESS);
         $this->response = new Response();
         $this->response->setMessage('Sweet Jesus');
 
@@ -96,7 +96,7 @@ class Application implements ApplicationInterface
 
     /**
      * Set current state
-     * @param mixed $state Must be one of constants in {@link State}. Can be bit logic.
+     * @param mixed $state Must be one of constants in {@link ApplicationState}. Can be bit logic.
      * @return $this
      */
     private function setState($state)

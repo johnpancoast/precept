@@ -50,7 +50,7 @@ interface ApplicationInterface
 
     /**
      * Get application state
-     * @return mixed See constants in {@see State} (can be bit logic)
+     * @return mixed See constants in {@see ApplicationState} (can be bit logic)
      */
     public function getState();
 }

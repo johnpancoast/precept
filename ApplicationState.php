@@ -15,7 +15,7 @@ namespace Shideon\BloxBundle;
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
  */
-class State
+class ApplicationState
 {
     const FAILURE = 1;
     const INIT = 2;
