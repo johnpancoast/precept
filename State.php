@@ -17,7 +17,7 @@ namespace Shideon\BloxBundle;
  */
 class State
 {
-    const INIT = 0;
-    const SUCCESS = 1;
-    const FAILURE = -1;
+    const FAILURE = 1;
+    const INIT = 2;
+    const SUCCESS = 4;
 }
