@@ -1,6 +1,7 @@
 {
-    "name": "shideon/deta",
-    "description": "A collection of common code I've been using for PHP projects",
+    "name": "shideon/precept",
+    "description": "A collection of abstract domain/model PHP logic that's become common for me.",
+    "license": "MIT",
     "authors": [
         {
             "name": "John Pancoast",
