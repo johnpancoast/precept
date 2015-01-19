@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model\Exception;
+namespace Precept\Model\Exception;
 
 /**
  * No model found

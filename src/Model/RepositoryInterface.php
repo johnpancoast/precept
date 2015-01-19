@@ -6,9 +6,9 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model;
+namespace Precept\Model;
 
-use \Deta\Model\Repository\SearchCriteria;
+use Precept\Model\Repository\SearchCriteria;
 
 /**
  * Model repository interface
@@ -21,7 +21,7 @@ interface RepositoryInterface
     /**
      * Find entity(ies)
      *
-     * @param  \Deta\Model\Repository\SearchCriteria $searchCriteria The criteria for search
+     * @param  \Precept\Model\Repository\SearchCriteria $searchCriteria The criteria for search
      * @return mixed                                                         Collection of entities
      */
     public function find(SearchCriteria $searchCriteria);

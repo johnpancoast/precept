@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model;
+namespace Precept\Model;
 
 /**
  * Base business object class
@@ -71,7 +71,7 @@ abstract class AbstractModel implements ModelInterface
      *
      * @access protected
      * @param  string                                    $eventName Event name
-     * @param  \Deta\Model\Event $event     Event object
+     * @param  \Precept\Model\Event $event     Event object
      * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
      * @return void
      */

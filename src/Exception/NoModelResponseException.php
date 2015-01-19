@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Shideon\BloxBundle\Exception;
+namespace Precept\Exception;
 
 /**
  * NoModelResponseException

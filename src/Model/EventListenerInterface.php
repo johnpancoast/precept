@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model;
+namespace Precept\Model;
 
 /**
  * Event listener interface

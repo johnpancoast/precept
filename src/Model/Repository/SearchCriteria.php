@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model\Repository;
+namespace Precept\Model\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 

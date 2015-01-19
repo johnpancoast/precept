@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model\DependencyTrait;
+namespace Precept\Model\DependencyTrait;
 
 /**
  * Dependency trait - repository
@@ -18,7 +18,7 @@ trait RepositoryTrait
     /**
      * Repository
      *
-     * @var \Deta\Model\RepositoryInterface
+     * @var \Precept\Model\RepositoryInterface
      */
     private $repository;
 
@@ -26,10 +26,10 @@ trait RepositoryTrait
      * Sets the Repository.
      *
      * @access public
-     * @param  \Deta\Model\RepositoryInterface $repository Repository
+     * @param  \Precept\Model\RepositoryInterface $repository Repository
      * @return self
      */
-    public function setRepository(\Deta\Model\RepositoryInterface $repository)
+    public function setRepository(\Precept\Model\RepositoryInterface $repository)
     {
         $this->repository = $repository;
 
@@ -40,7 +40,7 @@ trait RepositoryTrait
     * Gets the Repository.
     *
     * @access public
-    * @return \Deta\Model\RepositoryInterface
+    * @return \Precept\Model\RepositoryInterface
     */
     public function getRepository()
     {

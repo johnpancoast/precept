@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Shideon\BloxBundle;
+namespace Precept;
 
 /**
  * Response

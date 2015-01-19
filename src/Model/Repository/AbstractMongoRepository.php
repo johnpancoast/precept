@@ -6,13 +6,13 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model\Repository;
+namespace Precept\Model\Repository;
 
 use \Doctrine\ODM\MongoDB\DocumentManager;
 use \Symfony\Component\Validator\ValidatorInterface;
 
-use Deta\Model\RepositoryInterface;
-use Deta\Model\DependencyTrait as Dependency;
+use Precept\Model\RepositoryInterface;
+use Precept\Model\DependencyTrait as Dependency;
 
 /**
  * Repository - mongo

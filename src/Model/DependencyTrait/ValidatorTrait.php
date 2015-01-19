@@ -6,7 +6,7 @@
  * @author John Pancoast <shideon@gmail.com>
  */
 
-namespace Deta\Model\DependencyTrait;
+namespace Precept\Model\DependencyTrait;
 
 use \Symfony\Component\Validator\ValidatorInterface;
 
