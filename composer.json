@@ -1,6 +1,6 @@
 {
     "name": "shideon/precept",
-    "description": "A collection of abstract PHP logic for creating a domain/model layer.",
+    "description": "PHP logic for creating a domain/model layer.",
     "license": "MIT",
     "authors": [
         {
