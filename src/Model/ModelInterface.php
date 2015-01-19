@@ -61,7 +61,7 @@ interface ModelInterface
      * Add event listener
      *
      * @access public
-     * @param  Shideon\Bundle\SmeeApiBundle\EventListenerInterface $eventListeners Event listeners
+     * @param EventListenerInterface $eventListeners Event listeners
      * @return self
      */
     public function addEventListener($eventName, EventListenerInterface $eventListener);
