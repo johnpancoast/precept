@@ -22,6 +22,13 @@ abstract class AbstractModel implements ModelInterface
     use DependencyTrait\RepositoryTrait;
 
     /**
+     * Collection of event listeners
+     *
+     * @var array
+     */
+    private $eventListeners = [];
+
+    /**
      * {@inheritDoc}
      */
     abstract public function load($id);
@@ -50,13 +57,6 @@ abstract class AbstractModel implements ModelInterface
     {
         $this->setRepository($repository);
     }
-
-    /**
-	 * Collection of event listeners
-	 *
-	 * @var Shideon\Bundle\SmeeApiBundle\EventListenerInterface
-	 */
-    private $eventListeners = [];
 
     /**
      * {@inheritDoc}
