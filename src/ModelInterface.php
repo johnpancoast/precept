@@ -6,7 +6,9 @@
  * @license MIT
  */
 
-namespace Precept\Model;
+namespace Precept;
+
+use Precept\Model\EventListenerInterface;
 
 /**
  * Base business object class

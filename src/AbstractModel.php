@@ -6,7 +6,13 @@
  * @license MIT
  */
 
-namespace Precept\Model;
+namespace Precept;
+
+use Precept\Model\DependencyTrait;
+use Precept\Model\Event;
+use Precept\Model\EventListenerInterface;
+use Precept\Model\RepositoryInterface;
+use Precept\Model\UserRepositoryInterface;
 
 /**
  * Base business object class
