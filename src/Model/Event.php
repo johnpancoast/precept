@@ -1,9 +1,9 @@
 <?php
 /**
- * Base event class
- *
- * @copyright (c) 2014 John Pancoast
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
+ * @license MIT
  */
 
 namespace Precept\Model;
@@ -13,6 +13,8 @@ namespace Precept\Model;
  *
  * All events must extend this!
  *
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
  */
 class Event

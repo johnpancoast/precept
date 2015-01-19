@@ -1,9 +1,9 @@
 <?php
 /**
- * Repository - doctrine
- *
- * @copyright (c) 2014 John Pancoast
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
+ * @license MIT
  */
 
 namespace Precept\Model\Repository;
@@ -21,6 +21,8 @@ use Precept\Model\DependencyTrait as Dependency;
  * !!! NOTE THAT THIS CLASS WILL SOON BE DEFUNCT IN PLACE OF MONGO !!!
  * We're leaving it in case it can still be useful.
  *
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
  */
 abstract class AbstractDoctrineRepository implements RepositoryInterface

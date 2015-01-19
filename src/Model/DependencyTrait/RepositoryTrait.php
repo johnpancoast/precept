@@ -1,9 +1,9 @@
 <?php
 /**
- * Dependency trait - repository
- *
- * @copyright (c) 2014 John Pancoast
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
+ * @license MIT
  */
 
 namespace Precept\Model\DependencyTrait;
@@ -11,6 +11,8 @@ namespace Precept\Model\DependencyTrait;
 /**
  * Dependency trait - repository
  *
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
  */
 trait RepositoryTrait

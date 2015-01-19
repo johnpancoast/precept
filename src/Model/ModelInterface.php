@@ -1,9 +1,9 @@
 <?php
 /**
- * Interface for business objects
- *
- * @copyright (c) 2014 John Pancoast
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
+ * @license MIT
  */
 
 namespace Precept\Model;
@@ -14,6 +14,8 @@ namespace Precept\Model;
  * Note that each business object implementation will
  * define additional API
  *
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
  */
 interface ModelInterface

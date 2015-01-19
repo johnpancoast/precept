@@ -1,9 +1,9 @@
 <?php
 /**
- * Repository - mongo
- *
- * @copyright (c) 2014 John Pancoast
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
+ * @license MIT
  */
 
 namespace Precept\Model\Repository;
@@ -17,6 +17,8 @@ use Precept\Model\DependencyTrait as Dependency;
 /**
  * Repository - mongo
  *
+ * @package precept
+ * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <shideon@gmail.com>
  */
 abstract class AbstractMongoRepository implements RepositoryInterface
