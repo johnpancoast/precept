@@ -9,7 +9,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "doctrine/orm": "~2.4",
+        "doctrine/mongodb": "~1.1",
+        "symfony/validator": "~2.6"
     },
     "autoload": {
         "psr-4": { "Precept\\": "src" }
