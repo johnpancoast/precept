@@ -2,7 +2,7 @@
 /**
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <shideon@gmail.com>
+ * @author John Pancoast <johnpancoaster@gmail.com>
  * @license MIT
  */
 
@@ -14,7 +14,7 @@ use Pancoast\Precept\Exception\NoModelResponseException;
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <shideon@gmail.com>
+ * @author John Pancoast <johnpancoaster@gmail.com>
  */
 class Application implements ApplicationInterface
 {

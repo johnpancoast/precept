@@ -2,7 +2,7 @@
 /**
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <shideon@gmail.com>
+ * @author John Pancoast <johnpancoaster@gmail.com>
  * @license MIT
  */
 
@@ -13,6 +13,6 @@ namespace Pancoast\Precept\Model\Exception;
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <shideon@gmail.com>
+ * @author John Pancoast <johnpancoaster@gmail.com>
  */
 class ModelNotFoundException extends \Exception {}
