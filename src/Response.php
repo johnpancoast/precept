@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Precept;
+namespace Pancoast\Precept;
 
 /**
  * Response

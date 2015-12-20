@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Precept\Model\DependencyTrait;
+namespace Pancoast\Precept\Model\DependencyTrait;
 
 use \Symfony\Component\Validator\ValidatorInterface;
 

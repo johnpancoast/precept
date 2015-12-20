@@ -6,9 +6,9 @@
  * @license MIT
  */
 
-namespace Precept;
+namespace Pancoast\Precept;
 
-use Precept\Model\EventListenerInterface;
+use Pancoast\Precept\Model\EventListenerInterface;
 
 /**
  * Base business object class

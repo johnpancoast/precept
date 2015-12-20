@@ -6,9 +6,9 @@
  * @license MIT
  */
 
-namespace Precept\Model;
+namespace Pancoast\Precept\Model;
 
-use Precept\Model\Repository\SearchCriteria;
+use Pancoast\Precept\Model\Repository\SearchCriteria;
 
 /**
  * Model repository interface

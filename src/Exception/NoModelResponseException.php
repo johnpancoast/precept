@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Precept\Exception;
+namespace Pancoast\Precept\Exception;
 
 /**
  * NoModelResponseException

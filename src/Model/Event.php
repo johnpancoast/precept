@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Precept\Model;
+namespace Pancoast\Precept\Model;
 
 /**
  * Base event class

@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Precept\Model\Exception;
+namespace Pancoast\Precept\Model\Exception;
 
 /**
  * No model found

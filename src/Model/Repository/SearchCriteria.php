@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Precept\Model\Repository;
+namespace Pancoast\Precept\Model\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 

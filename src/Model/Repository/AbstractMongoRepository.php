@@ -6,13 +6,13 @@
  * @license MIT
  */
 
-namespace Precept\Model\Repository;
+namespace Pancoast\Precept\Model\Repository;
 
 use \Doctrine\ODM\MongoDB\DocumentManager;
 use \Symfony\Component\Validator\ValidatorInterface;
 
-use Precept\Model\RepositoryInterface;
-use Precept\Model\DependencyTrait as Dependency;
+use Pancoast\Precept\Model\RepositoryInterface;
+use Pancoast\Precept\Model\DependencyTrait as Dependency;
 
 /**
  * Repository - mongo

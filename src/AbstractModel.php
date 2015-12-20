@@ -6,13 +6,13 @@
  * @license MIT
  */
 
-namespace Precept;
+namespace Pancoast\Precept;
 
-use Precept\Model\DependencyTrait;
-use Precept\Model\Event;
-use Precept\Model\EventListenerInterface;
-use Precept\Model\RepositoryInterface;
-use Precept\Model\UserRepositoryInterface;
+use Pancoast\Precept\Model\DependencyTrait;
+use Pancoast\Precept\Model\Event;
+use Pancoast\Precept\Model\EventListenerInterface;
+use Pancoast\Precept\Model\RepositoryInterface;
+use Pancoast\Precept\Model\UserRepositoryInterface;
 
 /**
  * Base business object class
