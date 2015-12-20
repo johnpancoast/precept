@@ -1,11 +1,11 @@
 {
-    "name": "shideon/precept",
+    "name": "johnpancoast/precept",
     "description": "PHP logic for creating a domain/model layer.",
     "license": "MIT",
     "authors": [
         {
             "name": "John Pancoast",
-            "email": "shideon@gmail.com"
+            "email": "johnpancoast@gmail.com"
         }
     ],
     "require": {
