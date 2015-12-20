@@ -10,8 +10,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "doctrine/orm": "~2.4",
-        "doctrine/mongodb": "~1.1",
+        "doctrine/common": "~2.6.0",
         "symfony/validator": "~2.6"
     },
     "autoload": {
