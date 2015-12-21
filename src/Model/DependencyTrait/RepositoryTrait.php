@@ -8,6 +8,8 @@
 
 namespace Pancoast\Precept\Model\DependencyTrait;
 
+use Pancoast\Precept\Model\RepositoryInterface;
+
 /**
  * Dependency trait - repository
  *
@@ -31,7 +33,7 @@ trait RepositoryTrait
      * @param  \Pancoast\Precept\Model\RepositoryInterface $repository Repository
      * @return self
      */
-    public function setRepository(\Precept\Model\RepositoryInterface $repository)
+    public function setRepository(RepositoryInterface $repository)
     {
         $this->repository = $repository;
 
