@@ -20,7 +20,7 @@ trait RepositoryTrait
     /**
      * Repository
      *
-     * @var \Precept\Model\RepositoryInterface
+     * @var \Pancoast\Precept\Model\RepositoryInterface
      */
     private $repository;
 
@@ -28,7 +28,7 @@ trait RepositoryTrait
      * Sets the Repository.
      *
      * @access public
-     * @param  \Precept\Model\RepositoryInterface $repository Repository
+     * @param  \Pancoast\Precept\Model\RepositoryInterface $repository Repository
      * @return self
      */
     public function setRepository(\Precept\Model\RepositoryInterface $repository)
@@ -42,7 +42,7 @@ trait RepositoryTrait
     * Gets the Repository.
     *
     * @access public
-    * @return \Precept\Model\RepositoryInterface
+    * @return \Pancoast\Precept\Model\RepositoryInterface
     */
     public function getRepository()
     {

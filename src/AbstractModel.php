@@ -79,7 +79,7 @@ abstract class AbstractModel implements ModelInterface
      *
      * @access protected
      * @param  string                                    $eventName Event name
-     * @param  \Precept\Model\Event $event     Event object
+     * @param  \Pancoast\Precept\Model\Event $event     Event object
      * @param  mixed                                     $reference A reference which events can use to pass data between other events and the caller.
      * @return void
      */

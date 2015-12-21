@@ -23,7 +23,7 @@ interface RepositoryInterface
     /**
      * Find entity(ies)
      *
-     * @param  \Precept\Model\Repository\SearchCriteria $searchCriteria The criteria for search
+     * @param  \Pancoast\Precept\Model\Repository\SearchCriteria $searchCriteria The criteria for search
      * @return mixed                                                         Collection of entities
      */
     public function find(SearchCriteria $searchCriteria);
