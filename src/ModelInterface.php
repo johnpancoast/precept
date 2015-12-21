@@ -1,6 +1,6 @@
 <?php
 /**
- * @package precept
+ * @package johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  * @license MIT
@@ -16,7 +16,7 @@ use Pancoast\Precept\Model\EventListenerInterface;
  * Note that each business object implementation will
  * define additional API
  *
- * @package precept
+ * @package johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */

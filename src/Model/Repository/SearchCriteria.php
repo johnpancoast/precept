@@ -1,6 +1,6 @@
 <?php
 /**
- * @package precept
+ * @package johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  * @license MIT
@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Criteria;
  *
  * We only require doctrine here for its generic idea of collection criteria
  *
- * @package precept
+ * @package johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */

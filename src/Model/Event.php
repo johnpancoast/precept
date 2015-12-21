@@ -1,6 +1,6 @@
 <?php
 /**
- * @package precept
+ * @package johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  * @license MIT
@@ -13,7 +13,7 @@ namespace Pancoast\Precept\Model;
  *
  * All events must extend this!
  *
- * @package precept
+ * @package johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
