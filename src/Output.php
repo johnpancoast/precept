@@ -33,17 +33,17 @@ class Output implements OutputInterface
     private $exception;
 
     /**
-     * @var ModelResponseInterface
+     * Constructor
+     *
+     * @param $state One of the {@see ModelState} constants
+     * @param $message
+     * @param \Exception|null $exception
      */
-    private $modelResponse;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setState($state)
+    public function __construct($state, $message, \Exception $exception = null)
     {
         $this->state = $state;
-        return $this;
+        $this->message = $message;
+        $this->exception = $exception;
     }
 
     /**
@@ -57,29 +57,9 @@ class Output implements OutputInterface
     /**
      * {@inheritDoc}
      */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getMessage()
     {
         return $this->message;
-    }
-
-    /**
-     * Set exception (if applicaple)
-     * @param \Exception $e
-     * @return mixed
-     */
-    public function setException(\Exception $e)
-    {
-        $this->exception = $e;
-        return $this;
     }
 
     /**
@@ -89,16 +69,5 @@ class Output implements OutputInterface
     public function getException()
     {
         return $this->exception;
-    }
-
-    public function setModelResponse(ModelResponseInterface $modelResponse)
-    {
-        $this->modelResponse = $modelResponse;
-        return $this;
-    }
-
-    public function getModelResponse()
-    {
-        return $this->modelResponse;
     }
 }

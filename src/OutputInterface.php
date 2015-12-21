@@ -18,54 +18,23 @@ namespace Pancoast\Precept;
 interface OutputInterface
 {
     /**
-     * Set application state
-     * @param mixed $state ModelCallerState of application (accepts bit logic). See states in {@link ModelCallerState}
-     * @return mixed
-     */
-    public function setState($state);
-
-    /**
-     * Get application state
-     * @return mixed Can be bit logic. See states in {@link ModelCallerState}
+     * Get model state
+     *
+     * @return mixed Can be bit logic. See states in {@link ModelState}
      */
     public function getState();
 
     /**
-     * Set response message
-     * @param $message
-     * @return self
-     */
-    public function setMessage($message);
-
-    /**
      * Get response message
+     *
      * @return mixed
      */
     public function getMessage();
 
     /**
-     * Set exception (if applicaple)
-     * @param \Exception $e
-     * @return mixed
-     */
-    public function setException(\Exception $e);
-
-    /**
      * Get exception
-     * @return \Exception
+     *
+     * @return \Exception|null
      */
     public function getException();
-
-    /**
-     * Set the response that came from model
-     * @param ModelResponseInterface $modelResponse
-     * @return self
-     */
-    public function setModelResponse(ModelResponseInterface $modelResponse);
-
-    /**
-     * Get the response that came from the model
-     * @return ModelResponseInterface
-     */
-    public function getModelResponse();
 }

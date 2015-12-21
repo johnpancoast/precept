@@ -9,7 +9,9 @@
 namespace Pancoast\Precept;
 
 /**
- * ModelCallerInterface
+ * Contract for calling a model
+ *
+ * This is the interace your application will interact with directly.
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
@@ -18,13 +20,8 @@ namespace Pancoast\Precept;
 interface ModelCallerInterface
 {
     /**
-     * Constructor
-     * @param callable $modelAction
-     */
-    public function __construct();
-
-    /**
-     * Set request
+     * Set input
+     *
      * @param InputInterface $request
      * @return self
      */
@@ -43,14 +40,9 @@ interface ModelCallerInterface
     public function invokeModel(callable $modelCallable);
 
     /**
-     * Get application response
-     * @return ImmutableOutputInterface A response whose internals cannot change.
+     * Get model output
+     *
+     * @return OutputInterface
      */
-    public function getResponse();
-
-    /**
-     * Get application state
-     * @return mixed See constants in {@see ModelCallerState} (can be bit logic)
-     */
-    public function getState();
+    public function getOutput();
 }

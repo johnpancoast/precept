@@ -19,26 +19,21 @@ use Pancoast\Precept\Exception\NoModelResponseException;
 class ModelCaller implements ModelCallerInterface
 {
     /**
-     * @var Input|null Input object
+     * @var Input Model input
      */
-    private $request;
+    private $input;
 
     /**
-     * @var Output|null Output object
+     * @var Output Model output
      */
-    private $response;
+    private $output;
 
     /**
-     * @var mixed
-     */
-    private $state = ModelCallerState::INIT;
-
-    /**
-     * {@inheritDoc
+     * @inheritDoc
      */
     public function __construct()
     {
-        $this->response = new Output();
+        $this->output = new Output();
     }
 
     /**
@@ -51,16 +46,16 @@ class ModelCaller implements ModelCallerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function setInput(InputInterface $request)
     {
-        $this->request = $request;
+        $this->input = $request;
         return $this;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function invokeModel(callable $modelCallable)
     {
@@ -75,49 +70,25 @@ class ModelCaller implements ModelCallerInterface
             }
 
             $this->setState(ModelCallerState::SUCCESS);
-            $this->response->setModelResponse($modelResponse);
-            $this->response->setMessage('Success');
+            $this->output->setModelResponse($modelResponse);
+            $this->output->setMessage('Success');
 
             // TODO Call after hooks
             // TODO Emit after event
         } catch (\Exception $e) {
             $this->setState(ModelCallerState::FAILURE);
-            $this->response->setMessage('Exception: '.$e->getMessage());
-            $this->response->setException($e);
+            $this->output->setMessage('Exception: '.$e->getMessage());
+            $this->output->setException($e);
         }
 
         return $this;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
-    public function getResponse()
+    public function getOutput()
     {
-        $response = clone $this->response;
-        $response->setState($this->getState());
-        return new ImmutableOutput($response);
-    }
-
-    /**
-     * Set current state
-     * @param mixed $state Must be one of constants in {@link ModelCallerState}. Can be bit logic.
-     * @return $this
-     */
-    private function setState($state)
-    {
-        // TODO validation on states that are considered opposites (since we allow bitwise
-        // some statuses can theoretically be set at the same time when they shouldn't be).
-
-        $this->state = $state;
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getState()
-    {
-        return $this->state;
+        return $this->output;
     }
 }
