@@ -25,10 +25,10 @@ interface ModelCallerInterface
 
     /**
      * Set request
-     * @param RequestInterface $request
+     * @param InputInterface $request
      * @return self
      */
-    public function setRequest(RequestInterface $request);
+    public function setInput(InputInterface $request);
 
     /**
      * Invoke a model callable.

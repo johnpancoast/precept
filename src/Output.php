@@ -9,13 +9,13 @@
 namespace Pancoast\Precept;
 
 /**
- * Response
+ * Output
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class Response implements ResponseInterface
+class Output implements OutputInterface
 {
     /**
      * @var mixed ModelCaller state at time of response.
@@ -23,7 +23,7 @@ class Response implements ResponseInterface
     private $state;
 
     /**
-     * @var mixed $message Response message
+     * @var mixed $message Output message
      */
     private $message;
 

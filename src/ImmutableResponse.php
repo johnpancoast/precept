@@ -18,14 +18,14 @@ namespace Pancoast\Precept;
 class ImmutableResponse implements ImmutableResponseInterface
 {
     /**
-     * @var ResponseInterface
+     * @var OutputInterface
      */
     private $response;
 
     /**
      * {@inheritDoc}
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(OutputInterface $response)
     {
         $this->response = $response;
     }

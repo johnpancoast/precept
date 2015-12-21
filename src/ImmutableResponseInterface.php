@@ -22,10 +22,10 @@ interface ImmutableResponseInterface
      *
      * The only way to set the response.
      *
-     * @param ResponseInterface $response
+     * @param OutputInterface $response
      * @return mixed
      */
-    public function __construct(ResponseInterface $response);
+    public function __construct(OutputInterface $response);
 
     /**
      * Get application state

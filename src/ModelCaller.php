@@ -19,12 +19,12 @@ use Pancoast\Precept\Exception\NoModelResponseException;
 class ModelCaller implements ModelCallerInterface
 {
     /**
-     * @var Request|null Request object
+     * @var Input|null Input object
      */
     private $request;
 
     /**
-     * @var Response|null Response object
+     * @var Output|null Output object
      */
     private $response;
 
@@ -38,7 +38,7 @@ class ModelCaller implements ModelCallerInterface
      */
     public function __construct()
     {
-        $this->response = new Response();
+        $this->response = new Output();
     }
 
     /**
@@ -53,7 +53,7 @@ class ModelCaller implements ModelCallerInterface
     /**
      * {@inheritDoc}
      */
-    public function setRequest(RequestInterface $request)
+    public function setInput(InputInterface $request)
     {
         $this->request = $request;
         return $this;

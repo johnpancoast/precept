@@ -9,13 +9,13 @@
 namespace Pancoast\Precept;
 
 /**
- * Request
+ * Input
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class Request implements RequestInterface
+class Input implements InputInterface
 {
     /**
      * @var array Input
