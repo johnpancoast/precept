@@ -96,7 +96,7 @@ class ModelCaller implements ModelCallerInterface
     {
         $response = clone $this->response;
         $response->setState($this->getState());
-        return new ImmutableResponse($response);
+        return new ImmutableOutput($response);
     }
 
     /**

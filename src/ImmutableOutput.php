@@ -15,7 +15,7 @@ namespace Pancoast\Precept;
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class ImmutableResponse implements ImmutableResponseInterface
+class ImmutableOutput implements ImmutableOutputInterface
 {
     /**
      * @var OutputInterface

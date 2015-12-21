@@ -9,13 +9,13 @@
 namespace Pancoast\Precept;
 
 /**
- * ImmutableResponseInterface 
+ * Contract for immutable model output
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-interface ImmutableResponseInterface
+interface ImmutableOutputInterface
 {
     /**
      * Object constructor

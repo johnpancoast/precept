@@ -44,7 +44,7 @@ interface ModelCallerInterface
 
     /**
      * Get application response
-     * @return ImmutableResponseInterface A response whose internals cannot change.
+     * @return ImmutableOutputInterface A response whose internals cannot change.
      */
     public function getResponse();
 
