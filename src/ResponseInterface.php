@@ -19,14 +19,14 @@ interface ResponseInterface
 {
     /**
      * Set application state
-     * @param mixed $state ApplicationState of application (accepts bit logic). See states in {@link ApplicationState}
+     * @param mixed $state ModelCallerState of application (accepts bit logic). See states in {@link ModelCallerState}
      * @return mixed
      */
     public function setState($state);
 
     /**
      * Get application state
-     * @return mixed Can be bit logic. See states in {@link ApplicationState}
+     * @return mixed Can be bit logic. See states in {@link ModelCallerState}
      */
     public function getState();
 

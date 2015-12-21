@@ -9,13 +9,13 @@
 namespace Pancoast\Precept;
 
 /**
- * ApplicationInterface 
+ * ModelCallerInterface
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-interface ApplicationInterface
+interface ModelCallerInterface
 {
     /**
      * Constructor
@@ -50,7 +50,7 @@ interface ApplicationInterface
 
     /**
      * Get application state
-     * @return mixed See constants in {@see ApplicationState} (can be bit logic)
+     * @return mixed See constants in {@see ModelCallerState} (can be bit logic)
      */
     public function getState();
 }

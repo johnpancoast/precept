@@ -18,7 +18,7 @@ namespace Pancoast\Precept;
 class Response implements ResponseInterface
 {
     /**
-     * @var mixed Application state at time of response.
+     * @var mixed ModelCaller state at time of response.
      */
     private $state;
 

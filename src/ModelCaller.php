@@ -10,13 +10,13 @@ namespace Pancoast\Precept;
 use Pancoast\Precept\Exception\NoModelResponseException;
 
 /**
- * Application
+ * ModelCaller
  *
  * @package precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class Application implements ApplicationInterface
+class ModelCaller implements ModelCallerInterface
 {
     /**
      * @var Request|null Request object
@@ -31,7 +31,7 @@ class Application implements ApplicationInterface
     /**
      * @var mixed
      */
-    private $state = ApplicationState::INIT;
+    private $state = ModelCallerState::INIT;
 
     /**
      * {@inheritDoc
@@ -43,7 +43,7 @@ class Application implements ApplicationInterface
 
     /**
      * Simple factory that allows chaining
-     * @return Application
+     * @return ModelCaller
      */
     public static function factory()
     {
@@ -74,14 +74,14 @@ class Application implements ApplicationInterface
                 throw new NoModelResponseException();
             }
 
-            $this->setState(ApplicationState::SUCCESS);
+            $this->setState(ModelCallerState::SUCCESS);
             $this->response->setModelResponse($modelResponse);
             $this->response->setMessage('Success');
 
             // TODO Call after hooks
             // TODO Emit after event
         } catch (\Exception $e) {
-            $this->setState(ApplicationState::FAILURE);
+            $this->setState(ModelCallerState::FAILURE);
             $this->response->setMessage('Exception: '.$e->getMessage());
             $this->response->setException($e);
         }
@@ -101,7 +101,7 @@ class Application implements ApplicationInterface
 
     /**
      * Set current state
-     * @param mixed $state Must be one of constants in {@link ApplicationState}. Can be bit logic.
+     * @param mixed $state Must be one of constants in {@link ModelCallerState}. Can be bit logic.
      * @return $this
      */
     private function setState($state)
