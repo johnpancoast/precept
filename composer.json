@@ -11,7 +11,8 @@
     "require": {
         "php": ">=5.4.0",
         "doctrine/common": "~2.5",
-        "symfony/validator": "~2.6"
+        "symfony/validator": "~2.6",
+        "ocramius/proxy-manager": "1.0.x"
     },
     "autoload": {
         "psr-4": { "Pancoast\\Precept\\": "src" }
