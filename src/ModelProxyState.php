@@ -50,11 +50,6 @@ class ModelProxyState
     const OUTPUT = 'output';
 
     /**
-     * A model has been called but no output has been set
-     */
-    const NO_OUTPUT = 'no-output';
-
-    /**
      * An error or exception has occurred from calling a model
      */
     const ERROR = 'error';
