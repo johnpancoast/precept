@@ -1,9 +1,9 @@
 <?php
 /**
- * @package johnpancoast/precept
+ * @package       johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <johnpancoaster@gmail.com>
- * @license MIT
+ * @author        John Pancoast <johnpancoaster@gmail.com>
+ * @license       MIT
  */
 
 namespace Pancoast\Precept\Model;
@@ -13,9 +13,9 @@ use Pancoast\Precept\Model\Repository\SearchCriteria;
 /**
  * Model repository interface
  *
- * @package johnpancoast/precept
+ * @package       johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <johnpancoaster@gmail.com>
+ * @author        John Pancoast <johnpancoaster@gmail.com>
  */
 interface RepositoryInterface
 {
@@ -23,8 +23,8 @@ interface RepositoryInterface
     /**
      * Find entity(ies)
      *
-     * @param  \Pancoast\Precept\Model\Repository\SearchCriteria $searchCriteria The criteria for search
-     * @return mixed                                                         Collection of entities
+     * @param SearchCriteria $searchCriteria The criteria for search
+     * @return mixed Collection of entities
      */
     public function find(SearchCriteria $searchCriteria);
 
@@ -78,7 +78,8 @@ interface RepositoryInterface
      * Make and return an entity object
      *
      * @access public
-     * @param  string $name The name of the entity to make (some repositories deal with multiple entities). This method allows for consistent API.
+     * @param  string $name The name of the entity to make (some repositories deal with multiple entities). This method
+     *                      allows for consistent API.
      * @param  array  $data The data to make the entity with
      * @return object Entity object
      */
