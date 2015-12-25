@@ -19,7 +19,7 @@ interface ModelResponseInterface
 {
     /**
      * Set model state
-     * @param int One or more of {@link ModelState} (bit logic)
+     * @param int One or more of {@link ModelProxyState} (bit logic)
      * @return self
      */
     public function setState($state);
@@ -27,7 +27,7 @@ interface ModelResponseInterface
     /**
      * Get model state
      *
-     * See states in {@link ModelState}
+     * See states in {@link ModelProxyState}
      * Can be bit logic.
      *
      * @return mixed

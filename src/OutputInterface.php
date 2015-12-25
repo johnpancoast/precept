@@ -18,13 +18,6 @@ namespace Pancoast\Precept;
 interface OutputInterface
 {
     /**
-     * Get model state
-     *
-     * @return mixed Can be bit logic. See states in {@link ModelState}
-     */
-    public function getState();
-
-    /**
      * Get response message
      *
      * @return mixed

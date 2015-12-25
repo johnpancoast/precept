@@ -18,11 +18,6 @@ namespace Pancoast\Precept;
 class Output implements OutputInterface
 {
     /**
-     * @var mixed ModelCaller state at time of response.
-     */
-    private $state;
-
-    /**
      * @var mixed $message Output message
      */
     private $message;
@@ -35,23 +30,13 @@ class Output implements OutputInterface
     /**
      * Constructor
      *
-     * @param $state One of the {@see ModelState} constants
      * @param $message
      * @param \Exception|null $exception
      */
-    public function __construct($state, $message, \Exception $exception = null)
+    public function __construct($message, \Exception $exception = null)
     {
-        $this->state = $state;
         $this->message = $message;
         $this->exception = $exception;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 
     /**
