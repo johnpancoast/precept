@@ -10,6 +10,7 @@ namespace Pancoast\Precept;
 
 use Pancoast\Precept\Exception\GettingOutputTooEarlyException;
 use Pancoast\Precept\Exception\ModelNotObjectException;
+use Pancoast\Precept\Exception\NoModelOutputException;
 use Pancoast\Precept\Exception\UnknownModelMethodException;
 use Pancoast\Precept\ModelProxyState as State;
 
@@ -85,6 +86,9 @@ class ModelProxy implements ModelProxyInterface
             }
 
             $this->output = call_user_func_array([$this->model, $name], func_get_args()[1]);
+            if (!$this->output instanceof OutputInterface) {
+                throw new NoModelOutputException();
+            }
 
             $this->state = State::POST_MODEL;
 

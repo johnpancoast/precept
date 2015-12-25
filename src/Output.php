@@ -1,9 +1,9 @@
 <?php
 /**
- * @package johnpancoast/precept
+ * @package       johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <johnpancoaster@gmail.com>
- * @license MIT
+ * @author        John Pancoast <johnpancoaster@gmail.com>
+ * @license       MIT
  */
 
 namespace Pancoast\Precept;
@@ -11,32 +11,44 @@ namespace Pancoast\Precept;
 /**
  * Output
  *
- * @package johnpancoast/precept
+ * @package       johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
- * @author John Pancoast <johnpancoaster@gmail.com>
+ * @author        John Pancoast <johnpancoaster@gmail.com>
  */
 class Output implements OutputInterface
 {
     /**
-     * @var mixed $message Output message
+     * Message of the response from model
+     *
+     * @var string
      */
     private $message;
 
     /**
-     * @var \Exception|null Exception (if applicable)
+     * State of the model
+     *
+     * @var string
      */
-    private $exception;
+    private $state;
 
     /**
      * Constructor
      *
-     * @param $message
-     * @param \Exception|null $exception
+     * @param string $message
+     * @param string $state
      */
-    public function __construct($message, \Exception $exception = null)
+    public function __construct($state, $message)
     {
+        $this->state = $state;
         $this->message = $message;
-        $this->exception = $exception;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 
     /**
@@ -45,14 +57,5 @@ class Output implements OutputInterface
     public function getMessage()
     {
         return $this->message;
-    }
-
-    /**
-     * Get exception
-     * @return \Exception
-     */
-    public function getException()
-    {
-        return $this->exception;
     }
 }

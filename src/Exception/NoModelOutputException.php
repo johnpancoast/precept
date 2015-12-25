@@ -9,13 +9,13 @@
 namespace Pancoast\Precept\Exception;
 
 /**
- * NoModelResponseException
+ * NoModelOutputException
  *
  * @package johnpancoast/precept
  * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class NoModelResponseException extends \Exception
+class NoModelOutputException extends \Exception
 {
-    public $message = 'Expected model response from model callable.';
+    public $message = 'Expected to receive instance of \Pancoast\Precept\OutputInterface from call to model';
 }

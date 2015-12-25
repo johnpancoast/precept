@@ -50,7 +50,7 @@ interface ModelProxyInterface
      *
      * @param $name
      * @param $arguments
-     * @return bool True on success
+     * @return OutputInterface
      * @throws \Exception Any exception caught from a call to model will be thrown and this class will be in state
      *                    {@see ModelProxyState::ERROR}.
      */

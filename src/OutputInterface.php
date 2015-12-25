@@ -18,16 +18,17 @@ namespace Pancoast\Precept;
 interface OutputInterface
 {
     /**
+     * Get model state
+     *
+     * @return string
+     * @see ModelProxyState
+     */
+    public function getState();
+
+    /**
      * Get response message
      *
      * @return mixed
      */
     public function getMessage();
-
-    /**
-     * Get exception
-     *
-     * @return \Exception|null
-     */
-    public function getException();
 }
