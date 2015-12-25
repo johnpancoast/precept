@@ -13,43 +13,44 @@ use Pancoast\Precept\Model\Repository\SearchCriteria;
 /**
  * Model repository interface
  *
- * @package       johnpancoast/precept
- * @copyright (c) 2014-2015 John Pancoast
- * @author        John Pancoast <johnpancoaster@gmail.com>
+ * @author John Pancoast <johnpancoaster@gmail.com>
  */
 interface RepositoryInterface
 {
+    /**
+     * Find one entity by id
+     *
+     * @param mixed $id
+     * @return Object Entity
+     */
+    public function findOneById($id);
 
     /**
-     * Find entity(ies)
+     * Find entities using simple array of search params
      *
-     * @param SearchCriteria $searchCriteria The criteria for search
-     * @return mixed Collection of entities
+     * @param array $searchParams
+     * @return Object[]
      */
-    public function find(SearchCriteria $searchCriteria);
-
-    /**
-     * Find one entity by a certain field
-     *
-     * @access public
-     * @param  mixed  $id    Entity id
-     * @param  string $field Field to search (implementations should default to their "primary key")
-     * @return object An entity object
-     */
-    public function findOne($id, $field = '');
+    public function findBy(array $searchParams);
 
     /**
      * Find all entities
      *
-     * @access public
-     * @return mixed Collection of entities
+     * @return Object[] Collection of entities
      */
     public function findAll();
 
     /**
+     * Find entities using search
+     *
+     * @param SearchCriteria $searchCriteria The criteria for search
+     * @return Object[]
+     */
+    public function find(SearchCriteria $searchCriteria);
+
+    /**
      * Create entity
      *
-     * @access public
      * @param  array $data Entity data
      * @return object Entity object
      */
@@ -58,7 +59,6 @@ interface RepositoryInterface
     /**
      * Update an entity
      *
-     * @access public
      * @param  mixed $id   Id of entity to update
      * @param  array $data Entity data
      * @return object Entity object
@@ -68,7 +68,6 @@ interface RepositoryInterface
     /**
      * Delete an entity
      *
-     * @access public
      * @param  mixed $id Id of entity to delete
      * @return bool  Success
      */
@@ -77,11 +76,8 @@ interface RepositoryInterface
     /**
      * Make and return an entity object
      *
-     * @access public
-     * @param  string $name The name of the entity to make (some repositories deal with multiple entities). This method
-     *                      allows for consistent API.
      * @param  array  $data The data to make the entity with
      * @return object Entity object
      */
-    public function make($name, array $data);
+    public function make(array $data);
 }
