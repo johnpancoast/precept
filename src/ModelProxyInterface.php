@@ -11,8 +11,8 @@ namespace Pancoast\Precept;
 /**
  * A model proxy is the core logic your application will interact with
  *
- * You will hand this object your domain/business models and call methods on it through this proxy. Events will be
- * emitted before and after the calls (and maybe more places in the future).
+ * You will hand this object your domain/business models and call methods on it through this proxy. The implementer of
+ * this class may execute logic before and/or after calls to your model.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
