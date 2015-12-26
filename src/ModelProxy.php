@@ -94,11 +94,7 @@ class ModelProxy implements ModelProxyInterface
 
             // TODO logic after model was called like events
 
-            if ($this->output) {
-                $this->state = State::OUTPUT;
-            } else {
-                $this->state = State::NO_OUTPUT;
-            }
+            $this->state = State::OUTPUT;
 
             return true;
 
