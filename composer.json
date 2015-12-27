@@ -1,6 +1,6 @@
 {
     "name": "johnpancoast/precept",
-    "description": "PHP logic for creating a domain/model layer.",
+    "description": "PHP interfaces and abstractions to assist in separating your model layer from your application layer",
     "license": "MIT",
     "authors": [
         {
