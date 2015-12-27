@@ -9,9 +9,7 @@
 namespace Pancoast\Precept;
 
 use Pancoast\Precept\Model\CallableActionRegistry;
-use Pancoast\Precept\Model\Registry\CallableRegistryInterface;
-use Pancoast\Precept\Model\Registry\RepositoryRegistryInterface;
-use Pancoast\Precept\Model\RepositoryInterface;
+use Pancoast\Precept\Model\CallableRegistryInterface;
 
 /**
  * Contract for a model
@@ -21,38 +19,13 @@ use Pancoast\Precept\Model\RepositoryInterface;
 interface ModelInterface
 {
     /**
-     * Register repositories this model requires
-     *
-     * @param \Pancoast\Precept\Model\Registry\RepositoryRegistryInterface $repositoryRegistry
-     * @return self
-     */
-    public function setRepositories(RepositoryRegistryInterface $repositoryRegistry);
-
-    /**
-     * Add repository that this model requires
-     *
-     * @param                     $name
-     * @param RepositoryInterface $repository
-     * @return self
-     */
-    public function addRepository($name, RepositoryInterface $repository);
-
-    /**
-     * Get a repository
-     *
-     * @param $name
-     * @return RepositoryInterface
-     */
-    public function getRepository($name);
-
-    /**
      * Register actions
      *
      * The model wrapper at {@see ModelWrapperInterface} will allow calls to registered callables. These callables are
      * defined here by the consumer (you, in each model in your application). You register the calls you want to be
      * accessible via the passed registry.
      *
-     * @param CallableRegistryInterface $callableRegistry
+     * @param \Pancoast\Precept\Model\CallableRegistryInterface $callableRegistry
      * @return void
      */
     public function registerModelCallables(CallableRegistryInterface $callableRegistry);

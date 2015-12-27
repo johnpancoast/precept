@@ -7,7 +7,7 @@
  */
 
 
-namespace Pancoast\Precept\Model\Registry;
+namespace Pancoast\Precept\Model;
 
 use Doctrine\Common\Collections\Collection as CollectionInterface;
 

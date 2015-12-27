@@ -8,8 +8,8 @@
 
 namespace Pancoast\Precept;
 
-use Pancoast\Precept\Model\Registry\CallableRegistry;
-use Pancoast\Precept\Model\Registry\CallableRegistryInterface;
+use Pancoast\Precept\Model\CallableRegistry;
+use Pancoast\Precept\Model\CallableRegistryInterface;
 use Pancoast\Precept\ModelWrapperState as State;
 
 /**

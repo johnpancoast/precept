@@ -6,30 +6,29 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model\Registry;
+namespace Pancoast\Precept\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Pancoast\Precept\Model\RepositoryInterface;
 
 /**
- * A registry of repositories
+ * Model callable registry
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class RepositoryRegistry extends ArrayCollection implements RepositoryRegistryInterface
+class CallableRegistry extends ArrayCollection implements CallableRegistryInterface
 {
     /**
      * @inheritDoc
      */
-    public function addRepository($name, RepositoryInterface $repository)
+    public function addCallable($name, callable $action)
     {
-        $this->set($name, $repository);
+        $this->set($name, $action);
     }
 
     /**
      * @inheritDoc
      */
-    public function getRepository($name)
+    public function getCallable($name)
     {
         return $this->get($name);
     }
