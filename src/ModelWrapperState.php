@@ -41,7 +41,7 @@ class ModelWrapperState
     const POST_MODEL = 'post-model';
 
     /**
-     * A model has been called and there is out to get
+     * A model has been called and there is output to get
      *
      * @see ModelWrapperInterface::getOutput()
      * @see OutputInterface
