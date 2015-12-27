@@ -23,7 +23,7 @@ interface ModelInterface
      *
      * The model wrapper at {@see ModelWrapperInterface} will allow calls to registered callables. These callables are
      * defined here by the consumer (you, in each model in your application). You register the calls you want to be
-     * accessible via the passed registry.
+     * accessible via calling methods on the passed registry.
      *
      * @param \Pancoast\Precept\Model\CallableRegistryInterface $callableRegistry
      * @return void
