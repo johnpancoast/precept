@@ -11,9 +11,8 @@ namespace Pancoast\Precept;
 /**
  * A model wrapper is the core logic your application will interact with
  *
- * You will hand this your models that implement {@see ModelInterface} or extend {@see AbstractModel} and call methods
- * on it that the model has explicitly registered. The wrapper encapsulates these calls so that it can execute logic
- * before or after them.
+ * You will hand this your models that implement {@see ModelInterface} and call methods on it that the model has
+ * explicitly registered. The wrapper encapsulates these calls so that it can execute logic before or after them.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
