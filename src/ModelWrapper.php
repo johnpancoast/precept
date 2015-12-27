@@ -130,7 +130,7 @@ class ModelWrapper implements ModelWrapperInterface
     /**
      * Magic method helper used to proxy calls to the model
      *
-     * Guys/Gals, I get the argument. If you don't like magic use {@see self::callMethod()} =).
+     * Guys/Gals, I get the argument. If you don't like magic use {@see self::callModel()} =).
      *
      * @param $name
      * @param $arguments
