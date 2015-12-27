@@ -13,6 +13,9 @@ use Pancoast\Precept\Model\Repository\SearchCriteria;
 /**
  * Model repository interface
  *
+ * Note that as of 12/26/15, aside from a helpful trait, this interface is not depended on anywhere. It is your models
+ * who will likely either depend on instances of this or extensions of it.
+ *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
 interface RepositoryInterface
@@ -76,7 +79,7 @@ interface RepositoryInterface
     /**
      * Make and return an entity object
      *
-     * @param  array  $data The data to make the entity with
+     * @param  array $data The data to make the entity with
      * @return object Entity object
      */
     public function make(array $data);
