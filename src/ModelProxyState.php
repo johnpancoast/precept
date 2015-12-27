@@ -43,9 +43,10 @@ class ModelProxyState
     const POST_MODEL = 'post-model';
 
     /**
-     * A model has been called and there is output
+     * A model has been called and there is out to get
      *
-     * Calls to {@see ModelProxyInterface::getOutput()} should receive {@see OutputInterface}.
+     * @see ModelProxyInterface::getOutput()
+     * @see OutputInterface
      */
     const OUTPUT = 'output';
 

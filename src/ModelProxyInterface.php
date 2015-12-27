@@ -21,10 +21,10 @@ interface ModelProxyInterface
     /**
      * Set model
      *
-     * @param Object $model A consumer's model object
+     * @param ModelInterface $model A consumer's model object
      * @return mixed
      */
-    public function setModel($model);
+    public function setModel(ModelInterface $model);
 
     /**
      * Set model input

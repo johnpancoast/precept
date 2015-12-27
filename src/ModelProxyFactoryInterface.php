@@ -26,5 +26,5 @@ interface ModelProxyFactoryInterface
      * @param ModelInterface $model A model
      * @return ModelProxyInterface
      */
-    public static function create($model);
+    public static function create(ModelInterface $model);
 }

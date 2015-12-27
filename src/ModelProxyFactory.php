@@ -25,7 +25,7 @@ class ModelProxyFactory implements ModelProxyFactoryInterface
      * that you still use this to create {@see ModelProxy} since this factory may include more functionality in the
      * future.
      */
-    public static function create($model)
+    public static function create(ModelInterface $model)
     {
         return new ModelProxy($model);
     }

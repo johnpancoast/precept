@@ -8,10 +8,8 @@
 
 namespace Pancoast\Precept;
 
-use Pancoast\Precept\Exception\GettingOutputTooEarlyException;
-use Pancoast\Precept\Exception\ModelNotObjectException;
-use Pancoast\Precept\Exception\NoModelOutputException;
-use Pancoast\Precept\Exception\UnknownModelMethodException;
+use Pancoast\Precept\Model\Registry\CallableRegistry;
+use Pancoast\Precept\Model\Registry\CallableRegistryInterface;
 use Pancoast\Precept\ModelProxyState as State;
 
 /**
@@ -43,16 +41,22 @@ class ModelProxy implements ModelProxyInterface
     private $output;
 
     /**
-     * @var int One of the constants in {@see ModelProxyState}
+     * @var int One of the state constants
+     * @see ModelProxyState
      */
     private $state = State::INIT;
 
     /**
+     * @var CallableRegistryInterface|null
+     */
+    private $callableRegistry;
+
+    /**
      * Constructor
      *
-     * @param Object $model A consumer's model object
+     * @param ModelInterface $model A consumer's model object
      */
-    public function __construct($model)
+    public function __construct(ModelInterface $model)
     {
         $this->setModel($model);
     }
@@ -60,12 +64,8 @@ class ModelProxy implements ModelProxyInterface
     /**
      * @inheritDoc
      */
-    public function setModel($model)
+    public function setModel(ModelInterface $model)
     {
-        if (!is_object($model)) {
-            throw new ModelNotObjectException();
-        }
-
         $this->model = $model;
     }
 
@@ -75,19 +75,21 @@ class ModelProxy implements ModelProxyInterface
     public function callModel($name, $arguments/*, $argument2, $argument3, etc */)
     {
         try {
+            $this->initCallableRegistry();
+
             $this->state = State::PRE_MODEL;
 
             // TODO logic before model is called like events
 
             $this->state = State::MODEL;
 
-            if (!method_exists($this->model, $name)) {
-                throw new \LogicException(sprintf('Attempting to call non-existent model method "%s::%s".', get_class($this->model), $name));
+            if (!$this->callableRegistry->containsKey($name)) {
+                throw new \LogicException(sprintf('Attempting to call unregistered method "%s" on model "%s". That class must register its available callables in "%s::%s".', $name, get_class($this->model), get_class($this->model), 'registerModelCallables()'));
             }
 
-            $this->output = call_user_func_array([$this->model, $name], func_get_args()[1]);
+            $this->output = call_user_func_array($this->callableRegistry->get($name), func_get_args()[1]);
             if (!$this->output instanceof OutputInterface) {
-                throw new \RuntimeException(sprintf('Model method "%s::%s" was successfulled called however, it must return an instance of %s', get_class($this->model), $name, '\Pancoast\Precept\OutputInterface'));
+                throw new \RuntimeException(sprintf('Registered model callable "%s" was successfully called, however, it must return an instance of %s', $name, '\Pancoast\Precept\OutputInterface'));
             }
 
             $this->state = State::POST_MODEL;
@@ -147,5 +149,27 @@ class ModelProxy implements ModelProxyInterface
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Init callable registry
+     *
+     * @param bool $force Force a reload
+     * @return void
+     */
+    private function initCallableRegistry($force = false)
+    {
+        // already been set
+        if (!$force && $this->callableRegistry instanceof CallableRegistryInterface) {
+            return;
+        }
+
+        if (!$this->model) {
+            throw new \LogicException('Attempting to init callable registry but we have no model');
+        }
+
+        $registry = new CallableRegistry();
+        $this->model->registerModelCallables($registry);
+        $this->callableRegistry = $registry;
     }
 }
