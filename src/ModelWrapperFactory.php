@@ -9,24 +9,24 @@
 namespace Pancoast\Precept;
 
 /**
- * Model proxy factory
+ * Model wrapper factory
  *
- * This creates model proxies which are the core interface your application will interact with.
+ * This creates model wrappers which are the core interface your application will interact with.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
- * @see    ModelProxyInterface
+ * @see    ModelWrapperInterface
  */
-class ModelProxyFactory implements ModelProxyFactoryInterface
+class ModelWrapperFactory implements ModelWrapperFactoryInterface
 {
     /**
      * @inheritDoc
      *
      * Although the internals are simple and your application code could handle this logic on its own, it's advised
-     * that you still use this to create {@see ModelProxy} since this factory may include more functionality in the
+     * that you still use this to create {@see ModelWrapper} since this factory may include more functionality in the
      * future.
      */
     public static function create(ModelInterface $model)
     {
-        return new ModelProxy($model);
+        return new ModelWrapper($model);
     }
 }

@@ -9,14 +9,15 @@
 namespace Pancoast\Precept;
 
 /**
- * A model proxy is the core logic your application will interact with
+ * A model wrapper is the core logic your application will interact with
  *
- * You will hand this object your domain/business models and call methods on it through this proxy. The implementer of
- * this class may execute logic before and/or after calls to your model.
+ * You will hand this your models that implement {@see ModelInterface} or extend {@see AbstractModel} and call methods
+ * on it that the model has explicitly registered. The wrapper encapsulates these calls so that it can execute logic
+ * before or after them.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-interface ModelProxyInterface
+interface ModelWrapperInterface
 {
     /**
      * Set model
@@ -52,14 +53,14 @@ interface ModelProxyInterface
      * @param $arguments
      * @return OutputInterface
      * @throws \Exception Any exception caught from a call to model will be thrown and this class will be in state
-     *                    {@see ModelProxyState::ERROR}.
+     *                    {@see ModelWrapperState::ERROR}.
      */
     public function callModel($name, $arguments/*, $argument2, $argument3, etc */);
 
     /**
      * Get current state
      *
-     * @return string One of the constant values in {@see ModelProxyState}.
+     * @return string One of the constant values in {@see ModelWrapperState}.
      */
     public function getState();
 }

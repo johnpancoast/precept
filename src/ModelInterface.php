@@ -48,7 +48,7 @@ interface ModelInterface
     /**
      * Register actions
      *
-     * The model wrapper at {@see ModelProxyInterface} will allow calls to registered callables. These callables are
+     * The model wrapper at {@see ModelWrapperInterface} will allow calls to registered callables. These callables are
      * defined here by the consumer (you, in each model in your application). You register the calls you want to be
      * accessible via the passed registry.
      *

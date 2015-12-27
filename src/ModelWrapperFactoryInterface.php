@@ -9,22 +9,22 @@
 namespace Pancoast\Precept;
 
 /**
- * Contract for the model proxy factory which creates model proxy instances
+ * Contract for the model wrapper factory which creates model wrapper instances
  *
  * This is the core logic your application should interact with
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-interface ModelProxyFactoryInterface
+interface ModelWrapperFactoryInterface
 {
     /**
-     * Create a model proxy
+     * Create a model wrapper
      *
-     * A model proxy wraps functionality around calls to the model (somewhat similar to the smart reference proxy
-     * pattern but not quite).
+     * A model wrapper wraps logic around calls that are proxied to the model (somewhat similar to the smart reference
+     * proxy pattern but not quite).
      *
      * @param ModelInterface $model A model
-     * @return ModelProxyInterface
+     * @return ModelWrapperInterface
      */
     public static function create(ModelInterface $model);
 }

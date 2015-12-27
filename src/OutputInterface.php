@@ -21,7 +21,7 @@ interface OutputInterface
      * Get model state
      *
      * @return string
-     * @see ModelProxyState
+     * @see ModelWrapperState
      */
     public function getState();
 

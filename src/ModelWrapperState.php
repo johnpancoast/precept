@@ -9,13 +9,11 @@
 namespace Pancoast\Precept;
 
 /**
- * Model proxy states
+ * Model wrapper states
  *
- * @package johnpancoast/precept
- * @copyright (c) 2014-2015 John Pancoast
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class ModelProxyState
+class ModelWrapperState
 {
     /**
      * Has been instantiated but has not yet done anything
@@ -45,7 +43,7 @@ class ModelProxyState
     /**
      * A model has been called and there is out to get
      *
-     * @see ModelProxyInterface::getOutput()
+     * @see ModelWrapperInterface::getOutput()
      * @see OutputInterface
      */
     const OUTPUT = 'output';

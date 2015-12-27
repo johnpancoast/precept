@@ -10,17 +10,17 @@ namespace Pancoast\Precept;
 
 use Pancoast\Precept\Model\Registry\CallableRegistry;
 use Pancoast\Precept\Model\Registry\CallableRegistryInterface;
-use Pancoast\Precept\ModelProxyState as State;
+use Pancoast\Precept\ModelWrapperState as State;
 
 /**
- * A model proxy contains the core logic to be executed before and after calls to the model it's proxy'ing
+ * A model wrapper contains the core logic to be executed before and after calls to the model it proxies calls to
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class ModelProxy implements ModelProxyInterface
+class ModelWrapper implements ModelWrapperInterface
 {
     /**
-     * Model we're proxy'ing
+     * Model we're wrapping
      *
      * @var ModelInterface
      */
@@ -42,7 +42,7 @@ class ModelProxy implements ModelProxyInterface
 
     /**
      * @var int One of the state constants
-     * @see ModelProxyState
+     * @see ModelWrapperState
      */
     private $state = State::INIT;
 
@@ -128,7 +128,7 @@ class ModelProxy implements ModelProxyInterface
     }
 
     /**
-     * Magic method helper to proxy calls to the model
+     * Magic method helper used to proxy calls to the model
      *
      * Guys/Gals, I get the argument. If you don't like magic use {@see self::callMethod()} =).
      *
@@ -136,7 +136,7 @@ class ModelProxy implements ModelProxyInterface
      * @param $arguments
      * @return bool True on success
      * @throws \Exception Any exception caught from a call to model will be thrown and this class will be in state
-     *                    {@see ModelProxyState::ERROR}.
+     *                    {@see ModelWrapperState::ERROR}.
      */
     public function __call($name, $arguments)
     {
