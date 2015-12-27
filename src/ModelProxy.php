@@ -82,12 +82,12 @@ class ModelProxy implements ModelProxyInterface
             $this->state = State::MODEL;
 
             if (!method_exists($this->model, $name)) {
-                throw new UnknownModelMethodException(sprintf('Could not find model method %s::%s', $this->model, $name));
+                throw new \LogicException(sprintf('Attempting to call non-existent model method "%s::%s".', get_class($this->model), $name));
             }
 
             $this->output = call_user_func_array([$this->model, $name], func_get_args()[1]);
             if (!$this->output instanceof OutputInterface) {
-                throw new NoModelOutputException();
+                throw new \RuntimeException(sprintf('Model method "%s::%s" was successfulled called however, it must return an instance of %s', get_class($this->model), $name, '\Pancoast\Precept\OutputInterface'));
             }
 
             $this->state = State::POST_MODEL;
@@ -119,7 +119,7 @@ class ModelProxy implements ModelProxyInterface
     public function getOutput()
     {
         if ($this->state != State::MODEL && $this->state != State::OUTPUT && $this->state != State::NO_OUTPUT) {
-            throw new GettingOutputTooEarlyException();
+            throw new \LogicException('Attempting to get output when model wrapper not in correct state');
         }
 
         return $this->output;
