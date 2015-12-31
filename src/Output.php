@@ -32,15 +32,24 @@ class Output implements OutputInterface
     private $state;
 
     /**
+     * Serialized model data
+     *
+     * @var array
+     */
+    private $data = [];
+
+    /**
      * Constructor
      *
      * @param string $message
      * @param string $state
+     * @param array $data Serialized model data
      */
-    public function __construct($state, $message)
+    public function __construct($state, $message, array $data = [])
     {
         $this->state = $state;
         $this->message = $message;
+        $this->data = $data;
     }
 
     /**
@@ -57,5 +66,13 @@ class Output implements OutputInterface
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 }

@@ -31,4 +31,11 @@ interface OutputInterface
      * @return mixed
      */
     public function getMessage();
+
+    /**
+     * Get serialized model data as part of model response
+     *
+     * @return array
+     */
+    public function getData();
 }
