@@ -116,8 +116,24 @@ abstract class AbstractModel implements ModelInterface
     /**
      * @inheritDoc
      */
-    public function delete()
+    public function clearIdentity()
     {
-        // TODO: Implement delete() method.
+        // TODO: Implement clearIdentity() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function deleteIdentity()
+    {
+        // TODO: Implement deleteIdentity() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isIdentityLoaded()
+    {
+        // TODO: Implement isIdentityLoaded() method.
     }
 }

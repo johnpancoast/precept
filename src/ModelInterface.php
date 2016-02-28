@@ -14,6 +14,17 @@ use Pancoast\Precept\Model\RepositoryInterface;
 /**
  * Contract for a model
  *
+ * Models have the following characteristics:
+ *   - A model can be considered a "business object".
+ *   - One model instance can correlate with *one* entity.
+ *   - An entity is the identity of the model.
+ *   - The entity that the model correlates with *can change* throughout the lifetime of the model object via methods
+ *     like {@see self::setIdentity()}, {@see self::setIdentityData()}, and {@see self::loadIdentityById()}.
+ *   - Entities typically relate with data persistence but this is not a rule. For our purposes they're considered
+ *     "objects with identities".
+ *   - Models use repositories to find, load, and persist entities. This allows entity related behavior to be
+ *     abstracted.
+ *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
 interface ModelInterface
@@ -28,7 +39,7 @@ interface ModelInterface
     /**
      * Set repository
      *
-     * The implementation of this interface should use this repository to find and persist entities.
+     * The implementation of this interface should use this repository for the majority of the identity related methods.
      *
      * @param RepositoryInterface $repository
      * @return self
@@ -76,9 +87,25 @@ interface ModelInterface
     public function getIdentityData();
 
     /**
+     * Clear the model's identity
+     *
+     * This has no direct effect on the model identity's persistence.
+     */
+    public function clearIdentity();
+
+    /**
      * Delete this model object's identity
+     *
+     * Also clears the identity from the model.
      *
      * @return bool Success
      */
-    public function delete();
+    public function deleteIdentity();
+
+    /**
+     * Does the model currently have an identity
+     *
+     * @return bool
+     */
+    public function isIdentityLoaded();
 }
