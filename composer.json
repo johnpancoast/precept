@@ -13,7 +13,7 @@
         "doctrine/common": "~2.5",
         "symfony/validator": ">=2.6",
         "symfony/serializer": ">=2.6",
-        "johnpancoast/php-common": "^1.0"
+        "johnpancoast/php-common": "~1.0"
     },
     "autoload": {
         "psr-4": { "Pancoast\\Precept\\": "src" }
