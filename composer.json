@@ -1,6 +1,6 @@
 {
     "name": "johnpancoast/precept",
-    "description": "PHP interfaces and abstractions to assist in separating your model layer from your application layer",
+    "description": "PHP interfaces and abstractions to help with the domain layer",
     "license": "MIT",
     "authors": [
         {
@@ -10,10 +10,10 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "doctrine/common": "~2.5",
-        "symfony/validator": ">=2.6",
-        "symfony/serializer": ">=2.6",
-        "johnpancoast/php-common": "~1.0"
+        "doctrine/common": "^2.0",
+        "symfony/validator": "^2.0 | ^3.2",
+        "symfony/serializer": "^2.0 | ^3.2",
+        "johnpancoast/php-common": "^6.2"
     },
     "autoload": {
         "psr-4": { "Pancoast\\Precept\\": "src" }
