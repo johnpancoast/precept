@@ -6,7 +6,7 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept;
+namespace Pancoast\Precept\Model;
 
 /**
  * Model factories create models
@@ -15,6 +15,8 @@ namespace Pancoast\Precept;
  * changes internally to precept. Extending this class is still allowed in those cases as long as you take internals
  * into account (at present, nothings really happening here yet).
  *
+ * @todo   Create interface
+ * @todo   Use model registry and repository registry, factory can use repository(ies) for loading models and lookup models in registry
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
 class ModelFactory
