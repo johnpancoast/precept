@@ -11,6 +11,7 @@
     "require": {
         "php": ">=5.4.0",
         "doctrine/common": "^2.0",
+        "symfony/event-dispatcher": "^2.0 | ^3.2",
         "symfony/validator": "^2.0 | ^3.2",
         "symfony/serializer": "^2.0 | ^3.2",
         "johnpancoast/php-common": "^6.2"
