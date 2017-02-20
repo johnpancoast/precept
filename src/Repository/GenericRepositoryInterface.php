@@ -10,19 +10,16 @@ namespace Pancoast\Precept\Repository;
 use Doctrine\Common\Persistence\ObjectRepository as ObjectRepositoryInterface;
 
 /**
- * Repository interface to work with state of entities.
+ * Generic repository interface to work with state of entities.
  *
- * Note that in DDD, repositories would likely work with models but this works with entities. This is because precept
- * sacrifices some DDD concepts for speed in development while still offering a lot of the benefits (for example,
- * making an in memory or DB implementation of your repositories).
- *
- * Note that this extends doctrine common's ObjectRepository persistence interface, however, it's a generic interface.
- * It does not include doctrine's ORM or DBAL functionality. You can easily include the common library and create your
- * own repositories that implement that interface with very little overhead and very little coupling to Doctrine.
+ * This allows you to typehint a generic interface (note that doctrine's object repository interface is generic and not
+ * tied to doctrine ORM or DBAL). This would be considered an anti-pattern in DDD, however, so only use it for the
+ * appropriate applications. Larger applications should have specific repositories with specific methods to work with
+ * persistable state of entities.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-interface RepositoryInterface extends ObjectRepositoryInterface
+interface GenericRepositoryInterface extends ObjectRepositoryInterface
 {
     /**
      * Store the state of an entity
