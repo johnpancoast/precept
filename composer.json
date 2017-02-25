@@ -14,7 +14,7 @@
         "symfony/event-dispatcher": "^2.0 | ^3.2",
         "symfony/validator": "^2.0 | ^3.2",
         "symfony/serializer": "^2.0 | ^3.2",
-        "johnpancoast/php-common": "^6.2"
+        "johnpancoast/php-common": "^6.3"
     },
     "autoload": {
         "psr-4": { "Pancoast\\Precept\\": "src" }
