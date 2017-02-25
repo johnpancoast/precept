@@ -15,25 +15,18 @@ use Pancoast\Precept\ObjectRegistry\RepositoryRegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Contract for a model
- *
- * Remember, precept is only attempting to make minor abstractions between the domain and the rest of the application.
- * In the future it may have more DDD features but for now, a model is just a simple object that receives the
- * repositories it requires (along with other generic requirements). The repositories can be abstract. Meaning you
- * can still make in-memory repositories while building your application without needing to build the other heavy
- * overhead in DDD.
+ * Contract for a model that relates directly with an entity
  *
  * Models have the following characteristics:
  *   - A model can be considered a simple "business object".
  *   - One model instance can correlate with *one* entity.
  *   - An entity is the identity of the model.
  *   - The entity that the model correlates with *can* change throughout the lifetime of the model object but should
- *     only be changed internally in the implementation and only by the client via abstractions (methods) provided to
- *     them.
+ *     only be changed internally in the implementation and only by the client via methods provided to them.
  *   - Entities typically relate with data persistence but this is not a rule. For our purposes they're considered
  *     "objects with identities".
  *   - Models use repositories to work with the state of entities (via the repository registry used to create the
- *     instance.
+ *     instance. TODO This is actually wrong. Model repositories should have reference to models, not the other way around.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
