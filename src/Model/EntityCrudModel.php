@@ -63,13 +63,11 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
      */
     public function getEntityClass()
     {
-        if (!parent::getEntityClass()) {
-            throw new NoEntityClassException(sprintf(
-                'Your model "%s" must override the public %s() method and have it return the entity class (string) that it supports.',
-                static::class,
-                __METHOD__
-            ));
-        }
+        throw new NoEntityClassException(sprintf(
+            'Your model "%s" must override the public %s() method and have it return the entity class (string) that it supports.',
+            static::class,
+            __METHOD__
+        ));
     }
 
     /**
