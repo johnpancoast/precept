@@ -26,6 +26,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * changes internally to precept or one of your extension of it.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
+ * @todo This is broken, don't use yet (or ever)
  */
 class EntityModelFactory implements EntityModelFactoryInterface
 {

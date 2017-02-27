@@ -17,6 +17,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * Model factory contract
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
+ * @todo This is broken, don't use yet (or ever)
  */
 interface EntityModelFactoryInterface
 {
