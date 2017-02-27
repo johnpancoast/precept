@@ -13,8 +13,8 @@ use Pancoast\Precept\Model\Exception\ModelNotLoadedException;
 use Pancoast\Precept\Model\Exception\NoEntityClassException;
 use Pancoast\Precept\Model\Exception\UnknownEntityException;
 use Pancoast\Precept\Model\Exception\EntityValidationException;
-use Pancoast\Precept\ObjectRegistry\RepositoryRegistryInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -28,11 +28,11 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
     /**
      * Constructor
      *
-     * @param EntityInterface|null             $entity
-     * @param ObjectManagerInterface|null      $objectManager
-     * @param RepositoryRegistryInterface|null $repositoryRegistry
-     * @param ValidatorInterface|null          $validator
-     * @param LoggerInterface|null             $logger
+     * @param EntityInterface|null          $entity
+     * @param ObjectManagerInterface|null   $objectManager
+     * @param ValidatorInterface|null       $entityValidator
+     * @param EventDispatcherInterface|null $eventDispatcher
+     * @param LoggerInterface|null          $logger
      *
      * @throws NoEntityClassException
      * @throws UnknownEntityException
@@ -40,16 +40,15 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
     public function __construct(
         EntityInterface $entity = null,
         ObjectManagerInterface $objectManager = null,
-        RepositoryRegistryInterface $repositoryRegistry = null,
-        ValidatorInterface $validator = null,
+        ValidatorInterface $entityValidator = null,
+        EventDispatcherInterface $eventDispatcher = null,
         LoggerInterface $logger = null
     )
     {
-        parent::__construct($entity, $objectManager, $repositoryRegistry, $validator, $logger);
+        parent::__construct($entity, $objectManager, $entityValidator, $eventDispatcher, $logger);
 
         if ($entity) {
             $this->validateEntityType($entity);
-            $this->entity = $entity;
         }
     }
 
@@ -113,7 +112,7 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
      */
     public function load($id)
     {
-        $this->entity = $this->repos->get($this->getEntityClass())->find($id);
+        $this->entity = $this->om->getRepository($this->getEntityClass())->find($id);
 
         return $this->entity !== null;
     }
@@ -148,6 +147,41 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
         $this->load($id);
 
         return $this->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete($flush = false)
+    {
+        if (!$this->isLoaded()) {
+            throw new ModelNotLoadedException(sprintf(
+                'Model must be loaded to be deleted. Call %::%s first or call %s::%s().',
+                self::class,
+                'load()',
+                self::class,
+                'loadAndDelete()'
+            ));
+        }
+
+        $this->om->remove($this->entity);
+        $this->entity = null;
+
+        if ($flush) {
+            $this->om->flush();
+        }
+
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function loadAndDelete($id, $flush = false)
+    {
+        $this->load($id);
+
+        return $this->delete($flush);
     }
 
     /**

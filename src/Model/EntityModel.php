@@ -8,6 +8,7 @@
 namespace Pancoast\Precept\Model;
 
 use Doctrine\Common\Persistence\ObjectManager as ObjectManagerInterface;
+use JMS\Serializer\EventDispatcher\EventDispatcherInterface;
 use Pancoast\Precept\Entity\EntityInterface;
 use Pancoast\Precept\ObjectRegistry\RepositoryRegistryInterface;
 use Psr\Log\LoggerInterface;
@@ -21,24 +22,31 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class EntityModel implements EntityModelInterface
 {
     /**
+     * Current entity in memory
+     *
+     * Any changes to its persisted state internal to the model will be mimicked here, regardless of flushing
+     * operations. That's important. It's also important to call flush when you mean to.
+     *
      * @var null|EntityInterface
      */
     protected $entity;
 
     /**
+     * Object manager
+     *
      * @var null|ObjectManagerInterface
      */
     protected $om;
 
     /**
-     * @var null|RepositoryRegistryInterface
-     */
-    protected $repos;
-
-    /**
      * @var null|ValidatorInterface
      */
     protected $validator;
+
+    /**
+     * @var EventDispatcherInterface|null
+     */
+    protected $dispatcher;
 
     /**
      * @var null|LoggerInterface
@@ -48,24 +56,23 @@ class EntityModel implements EntityModelInterface
     /**
      * Constructor
      *
-     * @param EntityInterface|null             $entity
-     * @param ObjectManagerInterface|null      $objectManager
-     * @param RepositoryRegistryInterface|null $repositoryRegistry
-     * @param ValidatorInterface|null          $validator
-     * @param LoggerInterface|null             $logger
+     * @param EntityInterface|null          $entity
+     * @param ObjectManagerInterface|null   $objectManager
+     * @param ValidatorInterface|null       $entityValidator
+     * @param EventDispatcherInterface|null $eventDispatcher
+     * @param LoggerInterface|null          $logger
      */
     public function __construct(
         EntityInterface $entity = null,
         ObjectManagerInterface $objectManager = null,
-        RepositoryRegistryInterface $repositoryRegistry = null,
-        ValidatorInterface $validator = null,
+        ValidatorInterface $entityValidator = null,
+        EventDispatcherInterface $eventDispatcher = null,
         LoggerInterface $logger = null
-    )
-    {
+    ) {
         $this->entity = $entity;
         $this->om = $objectManager;
-        $this->repos = $repositoryRegistry;
-        $this->validator = $validator;
+        $this->validator = $entityValidator;
+        $this->dispatcher = $eventDispatcher;
         $this->logger = $logger;
     }
 

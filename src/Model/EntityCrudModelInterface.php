@@ -33,7 +33,7 @@ interface EntityCrudModelInterface extends EntityModelInterface
      * @param EntityInterface $entity
      * @param bool            $flush Should entity change in memory be flushed
      *
-     * @return int Id
+     * @return string|int Id
      */
     public function create(EntityInterface $entity, $flush = false);
 
@@ -58,7 +58,7 @@ interface EntityCrudModelInterface extends EntityModelInterface
     /**
      * Load entity from internal state using an id
      *
-     * @param int $id
+     * @param string|int $id
      *
      * @return bool Success
      * @throws InvalidArgumentException
@@ -81,7 +81,7 @@ interface EntityCrudModelInterface extends EntityModelInterface
     /**
      * Is entity id loaded
      *
-     * @param int $id
+     * @param string|int $id
      *
      * @return bool
      */
@@ -90,7 +90,7 @@ interface EntityCrudModelInterface extends EntityModelInterface
     /**
      * Load id and get loaded entity
      *
-     * @param int $id
+     * @param string|int $id
      *
      * @return EntityInterface
      * @throws ModelNotLoadedException
@@ -99,4 +99,28 @@ interface EntityCrudModelInterface extends EntityModelInterface
      * @throws ObjectKeyNotSupportedException
      */
     public function loadAndGet($id);
+
+    /**
+     * Delete currently loaded entity
+     *
+     * @param bool $flush
+     *
+     * @return bool Success
+     * @throws ModelNotLoadedException
+     */
+    public function delete($flush = false);
+
+    /**
+     * Load id and delete it
+     *
+     * @param string|int $id
+     * @param bool       $flush
+     *
+     * @return bool Success
+     * @throws ModelNotLoadedException
+     * @throws InvalidArgumentException
+     * @throws ObjectKeyNotRegisteredException
+     * @throws ObjectKeyNotSupportedException
+     */
+    public function loadAndDelete($id, $flush = false);
 }
