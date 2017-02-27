@@ -14,6 +14,7 @@
         "symfony/event-dispatcher": "^2.0 | ^3.2",
         "symfony/validator": "^2.0 | ^3.2",
         "symfony/serializer": "^2.0 | ^3.2",
+        "psr/log": "^1.0",
         "johnpancoast/php-common": "^6.3"
     },
     "autoload": {
