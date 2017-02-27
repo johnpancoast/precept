@@ -46,5 +46,5 @@ interface EntityModelInterface
      *
      * @return string
      */
-    public static function getEntityClass();
+    public function getEntityClass();
 }
