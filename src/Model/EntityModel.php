@@ -8,10 +8,9 @@
 namespace Pancoast\Precept\Model;
 
 use Doctrine\Common\Persistence\ObjectManager as ObjectManagerInterface;
-use JMS\Serializer\EventDispatcher\EventDispatcherInterface;
 use Pancoast\Precept\Entity\EntityInterface;
-use Pancoast\Precept\ObjectRegistry\RepositoryRegistryInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**

@@ -31,21 +31,25 @@ interface EntityCrudModelInterface extends EntityModelInterface
      * Create model, leave in loaded state
      *
      * @param EntityInterface $entity
-     * @param bool            $flush Should entity change in memory be flushed
+     * @param bool $save Whether to save the state of the model after this operation. Call save() later to do same.
      *
-     * @return string|int Id
+     * @return int|string Id
+     * @internal param bool $flush Should entity change in memory be flushed
+     *
      */
-    public function create(EntityInterface $entity, $flush = false);
+    public function create(EntityInterface $entity, $save = false);
 
     /**
      * Update model, leave in updated state
      *
      * @param EntityInterface $entity
-     * @param bool            $flush Should entity change in memory be flushed
+     * @param bool $save Whether to save the state of the model after this operation. Call save() later to do same.
      *
      * @return bool Success
+     * @internal param bool $flush Should entity change in memory be flushed
+     *
      */
-    public function update(EntityInterface $entity, $flush = false);
+    public function update(EntityInterface $entity, $save = false);
 
     /**
      * Get loaded entity
@@ -103,12 +107,12 @@ interface EntityCrudModelInterface extends EntityModelInterface
     /**
      * Delete currently loaded entity
      *
-     * @param bool $flush
+     * @param bool $save Whether to save the state of the model after this operation. Call save() later to do same.
      *
      * @return bool Success
-     * @throws ModelNotLoadedException
+     * @internal param bool $flush
      */
-    public function delete($flush = false);
+    public function delete($save = false);
 
     /**
      * Load id and delete it
@@ -123,4 +127,11 @@ interface EntityCrudModelInterface extends EntityModelInterface
      * @throws ObjectKeyNotSupportedException
      */
     public function loadAndDelete($id, $flush = false);
+
+    /**
+     * Save the current state of the model
+     *
+     * @return bool Success
+     */
+    public function save();
 }

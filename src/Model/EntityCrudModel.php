@@ -43,8 +43,7 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
         ValidatorInterface $entityValidator = null,
         EventDispatcherInterface $eventDispatcher = null,
         LoggerInterface $logger = null
-    )
-    {
+    ) {
         parent::__construct($entity, $objectManager, $entityValidator, $eventDispatcher, $logger);
 
         if ($entity) {
@@ -62,37 +61,35 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
      */
     public function getEntityClass()
     {
-        throw new NoEntityClassException(sprintf(
-            'Your model "%s" must override the public %s() method and have it return the entity class (string) that it supports.',
-            static::class,
-            __METHOD__
-        ));
+        throw new NoEntityClassException(
+            sprintf(
+                'Your model "%s" must override the public %s() method and have it return the entity class (string) that it supports.',
+                static::class,
+                __METHOD__
+            )
+        );
     }
 
     /**
      * @inheritDoc
      */
-    public function create(EntityInterface $entity, $flush = false)
+    public function create(EntityInterface $entity, $save = false)
     {
         $id = null;
 
-        if ($id = $this->save($entity, $flush)) {
-            $this->entity = $entity;
-        }
-
-        return $id;
+        $this->persistState($save);
     }
 
     /**
      * @inheritDoc
      */
-    public function update(EntityInterface $entity, $flush = false)
+    public function update(EntityInterface $entity, $save = false)
     {
         if (!$this->entity) {
             throw new ModelNotLoadedException();
         }
 
-        return is_int($this->save($entity, $flush));
+        return is_int($this->persistState($save));
     }
 
     /**
@@ -152,24 +149,21 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
     /**
      * @inheritDoc
      */
-    public function delete($flush = false)
+    public function delete($save = false)
     {
         if (!$this->isLoaded()) {
-            throw new ModelNotLoadedException(sprintf(
-                'Model must be loaded to be deleted. Call %::%s first or call %s::%s().',
-                self::class,
-                'load()',
-                self::class,
-                'loadAndDelete()'
-            ));
+            throw new ModelNotLoadedException(
+                sprintf(
+                    'Model must be loaded to be deleted. Call %::%s first or call %s::%s().',
+                    self::class,
+                    'load()',
+                    self::class,
+                    'loadAndDelete()'
+                )
+            );
         }
 
-        $this->om->remove($this->entity);
-        $this->entity = null;
-
-        if ($flush) {
-            $this->om->flush();
-        }
+        $this->removeState($save);
 
         return true;
     }
@@ -185,40 +179,78 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
     }
 
     /**
+     * @inheritDoc
+     *
+     * @internal Always expect this method to persist the entity before flushing
+     */
+    public function save()
+    {
+        if ($this->entity) {
+            $this->om->persist($this->entity);
+        }
+
+        $this->om->flush();
+
+        return true;
+    }
+
+    /**
+     * Persist and optionally save entity state
+     *
+     * Whenever changes occur to the entity that this model relates with, it's best to use this method or
+     * self::removeState().
+     *
      * @param EntityInterface $entity
+     * @param bool            $save
      *
-     * @param bool            $flush
-     *
-     * @return int Saved entity
+     * @return string|int Entity id
      * @throws EntityValidationException
      * @throws NoEntityClassException
      * @throws UnknownEntityException
      */
-    private function save(EntityInterface $entity, $flush = false)
+    final protected function persistState(EntityInterface $entity, $save = false)
     {
         $this->validateEntity($entity);
-
-        $this->om->persist($entity);
         $this->entity = $entity;
 
-        if ($flush) {
-            $this->om->flush();
+        // if save is true, let it do the persisting (it always should internally).
+        if ($save) {
+            $this->save();
+        } else {
+            $this->om->persist($this->entity);
         }
 
         return $this->entity->getId();
     }
 
     /**
-     * This both checks the type of the entity and validates the entity
+     * Remove current model state from persistent state
      *
-     * @param EntityInterface $entity
+     * @param bool $save
+     *
+     * @return bool
+     */
+    final protected function removeState($save = false)
+    {
+        $this->om->remove($this->entity);
+        $this->entity = null;
+
+        if ($save) {
+            return $this->save();
+        }
+    }
+
+    /**
+     * Validate a passed entity or internal entity
      *
      * @throws EntityValidationException
      * @throws NoEntityClassException
      * @throws UnknownEntityException
      */
-    private function validateEntity(EntityInterface $entity)
+    final protected function validateEntity(EntityInterface $entity = null)
     {
+        $entity = $entity ?: $this->entity;
+
         $this->validateEntityType($entity);
 
         $errors = $this->validator->validate($entity) ?: [];
@@ -251,16 +283,18 @@ class EntityCrudModel extends EntityModel implements EntityCrudModelInterface
      * @throws NoEntityClassException
      * @throws UnknownEntityException
      */
-    private function validateEntityType(EntityInterface $entity)
+    final protected function validateEntityType(EntityInterface $entity)
     {
         $class = $this->getEntityClass();
 
         if (!is_a($entity, $class)) {
-            throw new UnknownEntityException(sprintf(
-                'Crud model expects entity to receive entity "%s" but received "%s".',
-                $class,
-                get_class($entity)
-            ));
+            throw new UnknownEntityException(
+                sprintf(
+                    'Crud model expects entity to receive entity "%s" but received "%s".',
+                    $class,
+                    get_class($entity)
+                )
+            );
         }
     }
 }
