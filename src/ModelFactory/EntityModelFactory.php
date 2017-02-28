@@ -1,23 +1,25 @@
 <?php
 /**
  * @package       johnpancoast/precept
- * @copyright (c) 2015 John Pancoast
- * @author        John Pancoast <johnpancoaster@gmail.com>
+ * @copyright (c) 2017 John Pancoast
  * @license       MIT
  */
 
 namespace Pancoast\Precept\ModelFactory;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Common\Persistence\ObjectManager as ObjectManagerInterface;
 use Pancoast\Common\Exception\InvalidArgumentException;
+use Pancoast\Common\Util\Exception\InvalidTypeArgumentException;
+use Pancoast\Common\Util\Exception\NotTraversableException;
 use Pancoast\Common\Util\Validator;
 use Pancoast\Precept\Entity\EntityInterface;
-use Pancoast\Precept\ModelFactory\Exception\EmptyRepositoryRegistryException;
+use Pancoast\Precept\ModelFactory\Exception\InvalidEntityException;
 use Pancoast\Precept\ModelFactory\Exception\InvalidModelClassException;
 use Pancoast\Precept\ModelFactory\Exception\UnknownModelException;
 use Pancoast\Precept\Model\EntityModelInterface;
-use Pancoast\Precept\ObjectRegistry\RepositoryRegistryInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Factory to create models
@@ -26,66 +28,67 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * changes internally to precept or one of your extension of it.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
- * @todo This is broken, don't use yet (or ever)
  */
 class EntityModelFactory implements EntityModelFactoryInterface
 {
     /**
-     * @var RepositoryRegistryInterface
+     * Object manager
+     *
+     * @var null|ObjectManagerInterface
      */
-    protected $repositoryRegistry;
+    protected $om;
 
     /**
-     * @var string
+     * @var null|ValidatorInterface
      */
-    protected $modelClass;
+    protected $validator;
 
     /**
-     * @var EventDispatcherInterface
+     * @var EventDispatcherInterface|null
      */
-    protected $eventDispatcher;
+    protected $dispatcher;
+
+    /**
+     * @var null|LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * Supported model classes and related entities
+     *
+     * @var array
+     */
+    protected $modelClasses = [];
 
     /**
      * Constructor
      *
-     * @param string                      $modelClass
-     * @param RepositoryRegistryInterface $repositoryRegistry
-     * @param EventDispatcherInterface    $eventDispatcher
+     * @param array                         $modelEntityMap Array of model classes (keys) and their related entity
+     *                                                      classes (values).
+     * @param ObjectManagerInterface|null   $objectManager
+     * @param ValidatorInterface|null       $entityValidator
+     * @param EventDispatcherInterface|null $eventDispatcher
+     * @param LoggerInterface|null          $logger
      *
-     * @throws EmptyRepositoryRegistryException
-     * @throws InvalidArgumentException
-     * @throws InvalidModelClassException
-     * @throws UnknownModelException
+     * @throws NoEntityClassException
+     * @throws UnknownEntityException
      */
-    protected function __construct(
-        $modelClass,
-        RepositoryRegistryInterface $repositoryRegistry,
-        EventDispatcherInterface $eventDispatcher
+    public function __construct(
+        array $modelEntityMap = [],
+        ObjectManagerInterface $objectManager = null,
+        ValidatorInterface $entityValidator = null,
+        EventDispatcherInterface $eventDispatcher = null,
+        LoggerInterface $logger = null
     ) {
-        $this->setRepositoryRegistry($repositoryRegistry);
+        $this->om = $objectManager;
+        $this->validator = $entityValidator;
+        $this->dispatcher = $eventDispatcher;
+        $this->logger = $logger;
 
-        if ($modelClass !== null) {
-            $this->setModelClass($modelClass);
+        foreach ($modelEntityMap as $modelClass => $entityClass) {
+            $this->addSupportedModel($modelClass, $entityClass);
         }
-
-        $this->eventDispatcher = $eventDispatcher;
     }
-
-    /**
-     * @inheritDoc
-     *
-     * @throws \Pancoast\Precept\ModelFactory\Exception\EmptyRepositoryRegistryException
-     * @throws InvalidModelClassException
-     * @throws UnknownDefaultRepositoryException
-     * @throws UnknownModelException
-     * @throws \Pancoast\Common\Exception\InvalidArgumentException
-     */
-    public static function createInstance(
-        $modelClass, RepositoryRegistryInterface $repositoryRegistry, EventDispatcherInterface $eventDispatcher
-    ) {
-        return new static($modelClass, $repositoryRegistry, $eventDispatcher);
-    }
-
 
     /**
      * @inheritDoc
@@ -98,92 +101,85 @@ class EntityModelFactory implements EntityModelFactoryInterface
         $this->validateSupportedModelClass($modelClass);
         $this->validateModelClass($modelClass);
 
-        return $this->createModelInstance($modelClass, $entity);
+        if ($entity) {
+            if (get_class($entity) != $this->modelClasses[$modelClass]) {
+                throw new InvalidEntityException(sprintf(
+                    'Expected entity to be of class "%s". Received class "%s"',
+                    $this->modelClasses[$modelClass],
+                    get_class($entity)
+                ));
+            }
+        }
+
+        return new $modelClass(
+            $entity,
+            $this->om,
+            $this->validator,
+            $this->dispatcher,
+            $this->logger
+        );
     }
 
     /**
      * @inheritDoc
      */
-    public function supportedModelClass($modelClass)
+    public function addSupportedModel($modelClass, $entityClass)
     {
-        // if self::$modelClasses was not set as an array, then any object is supported.
-        return !$this->modelClass || (is_array($this->modelClass) && isset($this->modelClass[$modelClass]));
+        Validator::validateType($modelClass, 'class');
+        Validator::validateType($entityClass, 'class');
+
+        $this->modelClasses[$modelClass] = $entityClass;
     }
 
     /**
-     * Set (validate) model classes
-     *
-     * @internal
-     *
-     * @param $modelClass
+     * @inheritDoc
+     */
+    public function isSupportedClass($modelClass)
+    {
+        Validator::validateType($modelClass, 'class');
+
+        return isset($this->modelClasses[$modelClass]);
+    }
+
+    /**
+     * Validator to throw exception if model class not supported
      *
      * @throws InvalidArgumentException
-     * @throws InvalidModelClassException
-     * @internal param $array
-     *
+     * @throws UnknownModelException
+     * @throws InvalidTypeArgumentException
+     * @throws NotTraversableException
      */
-    private function setModelClass($modelClass)
+    public function validateSupportedModelClass($modelClass)
     {
-        $this->validateModelClass($modelClass);
-        $this->modelClass = $modelClass;
-    }
+        Validator::validateType($modelClass, 'class');
 
-    /**
-     * Set repository registry
-     *
-     * @internal
-     *
-     * @param RepositoryRegistryInterface $repositoryRegistry
-     *
-     * @throws EmptyRepositoryRegistryException
-     * @throws \Pancoast\Common\Exception\InvalidArgumentException
-     */
-    private function setRepositoryRegistry(RepositoryRegistryInterface $repositoryRegistry)
-    {
-        $this->repositoryRegistry = $repositoryRegistry;
-
-        $count = $this->repositoryRegistry->getCount();
-
-        if ($count == 0) {
-            throw new Exception\EmptyRepositoryRegistryException();
-        }
-    }
-
-    /**
-     * Internal validator to throw exception if model class not supported
-     *
-     * @internal
-     *
-     * @param string $modelClass
-     *
-     * @throws \Pancoast\Precept\ModelFactory\Exception\UnknownModelException
-     * @throws InvalidArgumentException
-     */
-    private function validateSupportedModelClass($modelClass)
-    {
-        if (!$this->supportedModelClass(Validator::getValidatedValue($modelClass, 'string'))) {
+        if (!$this->isSupportedClass($modelClass)) {
             throw new Exception\UnknownModelException(
                 sprintf(
-                    'Attempted to create model for unknown model class "%s"',
-                    $modelClass
+                    'Unknown or unsupported model class "%s" encountered. The model class must be supported by this factory. You can add a model class (and its related entity class) by calling %s::%s. You can alternatively pass an array of them to the constructor.',
+                    $modelClass,
+                    self::class,
+                    'addSupportedClass()'
                 )
             );
         }
     }
 
     /**
-     * Internal validator to throw exception if model class not supported or not proper type
-     *
-     * @internal
+     * Validator to throw exception if model class not supported or not proper type
      *
      * @param string $modelClass
      *
-     * @throws \Pancoast\Precept\ModelFactory\Exception\InvalidModelClassException
      * @throws InvalidArgumentException
+     * @throws InvalidModelClassException
+     * @throws InvalidTypeArgumentException
+     * @throws NotTraversableException
      */
-    private function validateModelClass($modelClass)
+    public function validateModelClass($modelClass)
     {
-        if (!is_subclass_of(Validator::getValidatedValue($modelClass, 'string'), EntityModelInterface::class)) {
+        Validator::validateType($modelClass, 'class');
+
+        if (!is_subclass_of($modelClass, EntityModelInterface::class)) {
             throw new InvalidModelClassException(
                 sprintf(
                     'Model class "%s" must be an instance of %s',
@@ -192,21 +188,5 @@ class EntityModelFactory implements EntityModelFactoryInterface
                 )
             );
         }
-    }
-
-    /**
-     * Create model instance
-     *
-     * @internal
-     *
-     * @param                 $modelClass
-     * @param EntityInterface $entity
-     *
-     * @return EntityModelInterface
-     */
-    private function createModelInstance($modelClass, EntityInterface $entity)
-    {
-        /** @var EntityModelInterface $modelClass */
-        return $modelClass::createInstance($this, $entity, $this->repositoryRegistry, $this->eventDispatcher);
     }
 }
