@@ -101,14 +101,12 @@ class EntityModelFactory implements EntityModelFactoryInterface
         $this->validateSupportedModelClass($modelClass);
         $this->validateModelClass($modelClass);
 
-        if ($entity) {
-            if (get_class($entity) != $this->modelClasses[$modelClass]) {
-                throw new InvalidEntityException(sprintf(
-                    'Expected entity to be of class "%s". Received class "%s"',
-                    $this->modelClasses[$modelClass],
-                    get_class($entity)
-                ));
-            }
+        if ($entity && get_class($entity) != $this->modelClasses[$modelClass]) {
+            throw new InvalidEntityException(sprintf(
+                'Expected entity to be of class "%s". Received class "%s"',
+                $this->modelClasses[$modelClass],
+                get_class($entity)
+            ));
         }
 
         return new $modelClass(
