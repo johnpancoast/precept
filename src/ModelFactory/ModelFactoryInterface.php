@@ -14,29 +14,24 @@ use Pancoast\Precept\ModelFactory\Exception\InvalidModelClassException;
 use Pancoast\Precept\ModelFactory\Exception\UnknownModelException;
 
 /**
- * Entity model factory contract
- *
- * Entity model factories create entity models (which are models that correlate directly with an entity, a common use
- * case, admittedly not the only).
+ * Model factory contract
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-interface EntityModelFactoryInterface
+interface ModelFactoryInterface
 {
     /**
      * Create model instance using optional entity
      *
      * Note that the EntityModelInterface implies that this will call on EntityModelInterface::createInstance().
      *
-     * @param string               $modelClass
-     * @param EntityInterface|null $entity
+     * @param string $modelClass
      *
      * @return EntityModelInterface
-     * @throws UnknownModelException
-     * @throws InvalidModelClassException
-     * @throws InvalidArgumentException
+     * @internal param null|EntityInterface $entity
+     *
      */
-    public function createModel($modelClass, EntityInterface $entity = null);
+    public function createModel($modelClass);
 
     /**
      * Is the model class supported
@@ -50,10 +45,10 @@ interface EntityModelFactoryInterface
     /**
      * Add a supported class
      *
-     * @param string $modelClass Model class of which an instance would be EntityModelInterface
+     * @param string $modelClass AbstractModel class of which an instance would be EntityModelInterface
      * @param string $entityClass Entity class of which an instance would be EntityInterface
      *
-     * @return EntityModelFactoryInterface|self
+     * @return ModelFactoryInterface|self
      */
     public function addSupportedModel($modelClass, $entityClass);
 }

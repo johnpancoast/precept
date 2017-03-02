@@ -21,7 +21,7 @@ class EntityValidationException extends \LogicException
      *
      * @var ConstraintViolationListInterface|null
      */
-    protected $violationList;
+    private $violationList;
 
     /**
      * Constructor

@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class EntityModelFactory implements EntityModelFactoryInterface
+class ModelFactory implements ModelFactoryInterface
 {
     /**
      * Object manager
@@ -93,7 +93,7 @@ class EntityModelFactory implements EntityModelFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createModel($modelClass, EntityInterface $entity = null)
+    public function createModel($modelClass)
     {
         // this will validate that the model is set and that it's valid (although the check
         // for validity should have been done already, we still make sure here in case setter
@@ -101,16 +101,7 @@ class EntityModelFactory implements EntityModelFactoryInterface
         $this->validateSupportedModelClass($modelClass);
         $this->validateModelClass($modelClass);
 
-        if ($entity && get_class($entity) != $this->modelClasses[$modelClass]) {
-            throw new InvalidEntityException(sprintf(
-                'Expected entity to be of class "%s". Received class "%s"',
-                $this->modelClasses[$modelClass],
-                get_class($entity)
-            ));
-        }
-
         return new $modelClass(
-            $entity,
             $this->om,
             $this->validator,
             $this->dispatcher,
@@ -180,7 +171,7 @@ class EntityModelFactory implements EntityModelFactoryInterface
         if (!is_subclass_of($modelClass, EntityModelInterface::class)) {
             throw new InvalidModelClassException(
                 sprintf(
-                    'Model class "%s" must be an instance of %s',
+                    'AbstractModel class "%s" must be an instance of %s',
                     $modelClass,
                     EntityModelInterface::class
                 )

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package       johnpancoast/precept
- * @copyright (c) 2017 John Pancoast <johnpancoaster@gmail.com>
+ * @copyright (c) 2017 John Pancoast
  * @license       MIT
  */
 

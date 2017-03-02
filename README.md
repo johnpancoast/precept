@@ -1,14 +1,9 @@
 precept
 =======
 
-PHP interfaces and abstractions to help with the domain layer.
+PHP interfaces and abstractions to help with separating your models from the rest of your application.
 
-This will contain things that are loosely based on a couple ideas from DDD but
-it isn't meant to be a DDD solution. As I find things that are common for my
-application's domain model that can be abstracted, they'll move here, however,
-I sacrifice many ideas in DDD for speedier development but use similar ideas to
-DDD to help separate the domain from infrastructure details (mainly
-repositories). 
+As this grows it may borrow some ideas from DDD but it isn't meant to be a true DDD solution. It's meant to provide something basic to separate models from the rest of the app while still benefitting from quick development.
 
 **The APIs are moving as are branches, don't expect to use this yet.**
 
