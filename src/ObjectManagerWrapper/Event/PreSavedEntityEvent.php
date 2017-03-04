@@ -8,6 +8,10 @@
 namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
+ * An event dispatched before an entity is saved to memory
+ *
+ * This is run outside of any transaction the object manager wrapper might support.
+ *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
 class PreSavedEntityEvent extends EntityEvent

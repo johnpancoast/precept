@@ -57,7 +57,7 @@ abstract class AbstractEntityManagerWrapper extends AbstractObjectManagerWrapper
 
             throw new EntityManagerWrapperTransactionException(
                 sprintf(
-                    'Entity manager wrapper caught exception "%s" during a transaction inside of a flush operation. Transaction rolled back. See internal exception for details.',
+                    'An entity manager wrapper caught exception "%s" during a transaction inside of a flush operation. Transaction was rolled back. See internal exception for details.',
                     get_class($e)
                 ),
                 0,

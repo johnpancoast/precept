@@ -8,6 +8,11 @@
 namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
+ * An event dispatched before a flush operation
+ *
+ * This will be dispatched while still inside of a transaction. Exceptions thrown will cause the transaction to be
+ * rolled back.
+ *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
 class PreFlushedEntitiesEvent extends EntityEvent
