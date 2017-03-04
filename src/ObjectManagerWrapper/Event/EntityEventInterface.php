@@ -18,18 +18,9 @@ use Pancoast\Precept\Entity\EntityInterface;
 interface EntityEventInterface
 {
     /**
-     * Create an instance of this event
-     *
-     * @param EntityInterface $entity
-     *
-     * @return EntityEventInterface
-     */
-    public static function createEntityEvent(EntityInterface $entity = null);
-
-    /**
      * Get entity
      *
-     * @return object Entity object
+     * @return null|object Entity object
      */
     public function getEntity();
 }

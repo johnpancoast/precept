@@ -116,7 +116,7 @@ abstract class AbstractObjectManagerWrapper implements ObjectManagerWrapperInter
      */
     public function save(EntityInterface $entity, $flush = false)
     {
-        $this->dispatcher->dispatch(PreSavedEntityEvent::NAME, PreSavedEntityEvent::createEntityEvent($entity));
+        $this->dispatcher->dispatch(PreSavedEntityEvent::NAME, new PreSavedEntityEvent($entity));
 
         $this->validateEntity($entity);
 
@@ -126,7 +126,7 @@ abstract class AbstractObjectManagerWrapper implements ObjectManagerWrapperInter
             $this->flush();
         }
 
-        $this->dispatcher->dispatch(PostSavedEntityEvent::NAME, PostSavedEntityEvent::createEntityEvent($entity));
+        $this->dispatcher->dispatch(PostSavedEntityEvent::NAME, new PostSavedEntityEvent($entity));
 
         return true;
     }
@@ -136,7 +136,7 @@ abstract class AbstractObjectManagerWrapper implements ObjectManagerWrapperInter
      */
     public function remove(EntityInterface $entity, $flush = false)
     {
-        $this->dispatcher->dispatch(PreRemovedEntityEvent::NAME, PreRemovedEntityEvent::createEntityEvent($entity));
+        $this->dispatcher->dispatch(PreRemovedEntityEvent::NAME, new PreRemovedEntityEvent($entity));
 
         $this->validateEntityType($entity);
 
@@ -146,7 +146,7 @@ abstract class AbstractObjectManagerWrapper implements ObjectManagerWrapperInter
             $this->flush();
         }
 
-        $this->dispatcher->dispatch(PostRemovedEntityEvent::NAME, PostRemovedEntityEvent::createEntityEvent($entity));
+        $this->dispatcher->dispatch(PostRemovedEntityEvent::NAME, new PostRemovedEntityEvent($entity));
     }
 
     /**
@@ -154,11 +154,11 @@ abstract class AbstractObjectManagerWrapper implements ObjectManagerWrapperInter
      */
     public function flush()
     {
-        $this->dispatcher->dispatch(PreFlushedEntitiesEvent::NAME, PreFlushedEntitiesEvent::createEntityEvent());
+        $this->dispatcher->dispatch(PreFlushedEntitiesEvent::NAME, new PreFlushedEntitiesEvent());
 
         $this->om->flush();
 
-        $this->dispatcher->dispatch(PostFlushedEntitiesEvent::NAME, PostFlushedEntitiesEvent::createEntityEvent());
+        $this->dispatcher->dispatch(PostFlushedEntitiesEvent::NAME, new PostFlushedEntitiesEvent());
     }
 
     /**

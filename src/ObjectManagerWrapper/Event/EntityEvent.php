@@ -28,7 +28,7 @@ class EntityEvent extends Event implements EntityEventInterface
      *
      * @param EntityInterface $entity
      */
-    protected function __construct(EntityInterface $entity = null)
+    public function __construct(EntityInterface $entity = null)
     {
         // ensure our classes define their name properly
         if (!defined('static::NAME')) {
@@ -36,14 +36,6 @@ class EntityEvent extends Event implements EntityEventInterface
         }
 
         $this->entity = $entity;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function createEntityEvent(EntityInterface $entity = null)
-    {
-        return new static($entity);
     }
 
     /**
