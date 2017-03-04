@@ -5,7 +5,7 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\ModelFactory\Exception;
+namespace Pancoast\Precept\ObjectManagerWrapper\Factory\Exception;
 
 /**
  * When setting an empty repository registry

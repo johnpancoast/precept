@@ -5,28 +5,27 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model;
+namespace Pancoast\Precept\ObjectManagerWrapper;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Pancoast\Precept\Entity\EntityInterface;
 
 /**
- * Model contract
+ * An object manager wrapper wraps object managers and repositories for a specific entity.
  *
- * A model is what the rest of your application will interact with. The model should contain the core business logic. In
- * DDD, a domain will not have any knowledge of persistence but w sacrifice that idea of speed. Our models may contain
- * persistence logic as long as it uses abstractions for that persistence (and doctrine common provides perfect
- * interfaces for that without the need to couple to DBAL or ORM).
+ * This will combine APIs seen in object managers and their repositories. Implementations are left to wrap this
+ * as needed. It's assumed that each object manager is associated with exactly one entity. This allows custom wrapping
+ * of logic working an entity.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-interface ModelInterface
+interface ObjectManagerWrapperInterface
 {
     /**
      * Finds an object by its primary key / identifier.
      *
-     * This is the same API as doctrine common's ObjectRepository. This allows clients to use models to interact with
-     * repositories.
+     * This is the same API as doctrine common's ObjectRepository and should usually return the same thing. It allows
+     * the OM wrappers to easily call on familiar repository logic.
      *
      * @param mixed $id The identifier.
      *
@@ -38,8 +37,8 @@ interface ModelInterface
     /**
      * Finds all objects in the repository.
      *
-     * This is the same API as doctrine common's ObjectRepository. This allows clients to use models to interact with
-     * repositories.
+     * This is the same API as doctrine common's ObjectRepository and should usually return the same thing. It allows
+     * the OM wrappers to easily call on familiar repository logic.
      *
      * @return array|EntityInterface[] The objects.
      * @see ObjectRepository
@@ -49,8 +48,8 @@ interface ModelInterface
     /**
      * Finds objects by a set of criteria.
      *
-     * This is the same API as doctrine common's ObjectRepository. This allows clients to use models to interact with
-     * repositories.
+     * This is the same API as doctrine common's ObjectRepository and should usually return the same thing. It allows
+     * the OM wrappers to easily call on familiar repository logic.
      *
      * Optionally sorting and limiting details can be passed. An implementation may throw
      * an UnexpectedValueException if certain values of the sorting or limiting details are
@@ -71,8 +70,8 @@ interface ModelInterface
     /**
      * Finds a single object by a set of criteria.
      *
-     * This is the same API as doctrine common's ObjectRepository. This allows clients to use models to interact with
-     * repositories.
+     * This is the same API as doctrine common's ObjectRepository and should usually return the same thing. It allows
+     * the OM wrappers to easily call on familiar repository logic.
      *
      * @param array $criteria The criteria.
      *
@@ -110,8 +109,10 @@ interface ModelInterface
     /**
      * Returns the class name of the entity object managed by the repository.
      *
-     * This is the same API as doctrine common's ObjectRepository. This allows clients to use models to interact with
-     * repositories.
+     * This is the same API as doctrine common's ObjectRepository and should usually return the same thing. It allows
+     * the OM wrappers to easily call on familiar repository logic.
+     *
+     * This is additionally used by this object manager to return the entity that it's associated with.
      *
      * @return string
      * @see ObjectRepository

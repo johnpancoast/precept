@@ -6,7 +6,7 @@
  */
 
 
-namespace Pancoast\Precept\Model\Event;
+namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 use Pancoast\Precept\Entity\EntityInterface;
 

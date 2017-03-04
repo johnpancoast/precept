@@ -5,12 +5,12 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model\Event;
+namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class PostRemovedEntityEvent extends EntityEvent
+class PreSavedEntityEvent extends EntityEvent
 {
-    const NAME = 'precept.model.post_removed_entity';
+    const NAME = 'precept.model.pre_saved_entity';
 }

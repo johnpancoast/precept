@@ -5,31 +5,34 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model;
+namespace Pancoast\Precept\ObjectManagerWrapper;
 
 use Doctrine\Common\Persistence\ObjectManager as ObjectManagerInterface;
 use Pancoast\Precept\Entity\EntityInterface;
-use Pancoast\Precept\Model\Event\PostFlushedEntitiesEvent;
-use Pancoast\Precept\Model\Event\PostRemovedEntityEvent;
-use Pancoast\Precept\Model\Event\PreFlushedEntitiesEvent;
-use Pancoast\Precept\Model\Event\PreRemovedEntityEvent;
-use Pancoast\Precept\Model\Event\PostSavedEntityEvent;
-use Pancoast\Precept\Model\Event\PreSavedEntityEvent;
-use Pancoast\Precept\Model\Exception\EntityValidationException;
-use Pancoast\Precept\Model\Exception\UnknownEntityException;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PostFlushedEntitiesEvent;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PostRemovedEntityEvent;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PreFlushedEntitiesEvent;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PreRemovedEntityEvent;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PostSavedEntityEvent;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PreSavedEntityEvent;
+use Pancoast\Precept\ObjectManagerWrapper\Exception\EntityValidationException;
+use Pancoast\Precept\ObjectManagerWrapper\Exception\UnknownEntityException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Abstract model
+ * Abstract object manager wrapper
  *
- * All of your models can extend this. Models receive an object manager, a validator (for entity validation), an event
- * dispatcher, and a logger.
+ * Wrappers wrap object managers with additional logic that's been useful for me to generalize.
+ *
+ * All of your wrappers can extend this. Wrappers receive an object manager, a validator (for entity validation), an
+ * event dispatcher, and a logger. This wrapper will dispatch "pre" and "post" events for saving, removing, and flushing
+ * operations on entities.
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-abstract class AbstractModel implements ModelInterface
+abstract class AbstractObjectManagerWrapper implements ObjectManagerWrapperInterface
 {
     /**
      * @var ObjectManagerInterface
@@ -158,6 +161,11 @@ abstract class AbstractModel implements ModelInterface
         $this->dispatcher->dispatch(PostFlushedEntitiesEvent::NAME, PostFlushedEntitiesEvent::createEntityEvent());
     }
 
+    /**
+     * Validate entity type
+     *
+     * @param EntityInterface $entity
+     */
     protected function validateEntityType(EntityInterface $entity)
     {
         if (get_class($entity) != $this->getClassName()) {
@@ -172,7 +180,10 @@ abstract class AbstractModel implements ModelInterface
     }
 
     /**
+     * Validate entity
+     *
      * @internal This calls on self::validateEntityType()
+     *
      * @param EntityInterface $entity
      *
      * @throws EntityValidationException

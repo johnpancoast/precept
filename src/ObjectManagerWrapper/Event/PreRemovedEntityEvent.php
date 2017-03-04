@@ -5,13 +5,12 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\ModelFactory\Exception;
+namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
- * Throws when a model factory was asked to create an unknown model
- *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class UnknownModelException extends \LogicException
+class PreRemovedEntityEvent extends EntityEvent
 {
+    const NAME = 'precept.model.pre_removed_entity';
 }

@@ -5,13 +5,12 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\ModelFactory\Exception;
+namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
- * When an invalid model is encountered
- *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class InvalidModelClassException extends \LogicException
+class PostRemovedEntityEvent extends EntityEvent
 {
+    const NAME = 'precept.model.post_removed_entity';
 }

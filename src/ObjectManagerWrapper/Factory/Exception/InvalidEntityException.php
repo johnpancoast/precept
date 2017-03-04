@@ -5,12 +5,11 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model\Event;
+namespace Pancoast\Precept\ObjectManagerWrapper\Factory\Exception;
 
 /**
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class PreRemovedEntityEvent extends EntityEvent
+class InvalidEntityException extends \LogicException
 {
-    const NAME = 'precept.model.pre_removed_entity';
 }

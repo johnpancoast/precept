@@ -5,7 +5,7 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model\Event;
+namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
  * @author John Pancoast <johnpancoaster@gmail.com>

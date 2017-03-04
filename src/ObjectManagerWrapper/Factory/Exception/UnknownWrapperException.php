@@ -5,12 +5,13 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model\Event;
+namespace Pancoast\Precept\ObjectManagerWrapper\Factory\Exception;
 
 /**
+ * Throws when a model factory was asked to create an unknown wrapper
+ *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class PostFlushedEntitiesEvent extends EntityEvent
+class UnknownWrapperException extends \LogicException
 {
-    const NAME = 'precept.model.post_flushed_entities';
 }

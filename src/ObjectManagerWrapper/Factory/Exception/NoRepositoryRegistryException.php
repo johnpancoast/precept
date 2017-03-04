@@ -5,12 +5,13 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model\Event;
+namespace Pancoast\Precept\ObjectManagerWrapper\Factory\Exception;
 
 /**
+ * When a model factory has no repository registry to use
+ *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class PreFlushedEntitiesEvent extends EntityEvent
+class NoRepositoryRegistryException extends \LogicException
 {
-    const NAME = 'precept.model.pre_flushed_entities';
 }

@@ -5,7 +5,7 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\Model\Exception;
+namespace Pancoast\Precept\ObjectManagerWrapper\Exception;
 
 /**
  * @author John Pancoast <johnpancoaster@gmail.com>

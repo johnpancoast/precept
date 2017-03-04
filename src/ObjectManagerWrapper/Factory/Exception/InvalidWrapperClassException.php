@@ -5,13 +5,13 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\ModelFactory\Exception;
+namespace Pancoast\Precept\ObjectManagerWrapper\Factory\Exception;
 
 /**
- * When a model factory has no repository registry to use
+ * When an invalid wrapper is encountered
  *
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class NoRepositoryRegistryException extends \LogicException
+class InvalidWrapperClassException extends \LogicException
 {
 }

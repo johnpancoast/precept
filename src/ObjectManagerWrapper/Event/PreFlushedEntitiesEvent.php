@@ -5,11 +5,12 @@
  * @license       MIT
  */
 
-namespace Pancoast\Precept\ModelFactory\Exception;
+namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
  * @author John Pancoast <johnpancoaster@gmail.com>
  */
-class InvalidEntityException extends \LogicException
+class PreFlushedEntitiesEvent extends EntityEvent
 {
+    const NAME = 'precept.model.pre_flushed_entities';
 }
