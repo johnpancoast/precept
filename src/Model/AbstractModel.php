@@ -9,6 +9,12 @@ namespace Pancoast\Precept\Model;
 
 use Doctrine\Common\Persistence\ObjectManager as ObjectManagerInterface;
 use Pancoast\Precept\Entity\EntityInterface;
+use Pancoast\Precept\Model\Event\PostFlushedEntitiesEvent;
+use Pancoast\Precept\Model\Event\PostRemovedEntityEvent;
+use Pancoast\Precept\Model\Event\PreFlushedEntitiesEvent;
+use Pancoast\Precept\Model\Event\PreRemovedEntityEvent;
+use Pancoast\Precept\Model\Event\PostSavedEntityEvent;
+use Pancoast\Precept\Model\Event\PreSavedEntityEvent;
 use Pancoast\Precept\Model\Exception\EntityValidationException;
 use Pancoast\Precept\Model\Exception\UnknownEntityException;
 use Psr\Log\LoggerInterface;
@@ -75,7 +81,7 @@ abstract class AbstractModel implements ModelInterface
      */
     public function find($id)
     {
-        return $this->om->getRepository($this->getEntityClass())->find($id);
+        return $this->om->getRepository($this->getClassName())->find($id);
     }
 
     /**
@@ -83,7 +89,7 @@ abstract class AbstractModel implements ModelInterface
      */
     public function findAll()
     {
-        return $this->om->getRepository($this->getEntityClass())->findAll();
+        return $this->om->getRepository($this->getClassName())->findAll();
     }
 
     /**
@@ -91,7 +97,7 @@ abstract class AbstractModel implements ModelInterface
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->om->getRepository($this->getEntityClass())->findBy($criteria, $orderBy, $limit, $offset);
+        return $this->om->getRepository($this->getClassName())->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     /**
@@ -99,7 +105,7 @@ abstract class AbstractModel implements ModelInterface
      */
     public function findOneBy(array $criteria)
     {
-        return $this->om->getRepository($this->getEntityClass())->findOneBy($criteria);
+        return $this->om->getRepository($this->getClassName())->findOneBy($criteria);
     }
 
     /**
@@ -107,13 +113,17 @@ abstract class AbstractModel implements ModelInterface
      */
     public function save(EntityInterface $entity, $flush = false)
     {
-        $this->validateEntityType($entity);
+        $this->dispatcher->dispatch(PreSavedEntityEvent::NAME, PreSavedEntityEvent::createEntityEvent($entity));
+
+        $this->validateEntity($entity);
 
         $this->om->persist($entity);
 
         if ($flush) {
             $this->flush();
         }
+
+        $this->dispatcher->dispatch(PostSavedEntityEvent::NAME, PostSavedEntityEvent::createEntityEvent($entity));
 
         return true;
     }
@@ -123,6 +133,8 @@ abstract class AbstractModel implements ModelInterface
      */
     public function remove(EntityInterface $entity, $flush = false)
     {
+        $this->dispatcher->dispatch(PreRemovedEntityEvent::NAME, PreRemovedEntityEvent::createEntityEvent($entity));
+
         $this->validateEntityType($entity);
 
         $this->om->remove($entity);
@@ -130,6 +142,8 @@ abstract class AbstractModel implements ModelInterface
         if ($flush) {
             $this->flush();
         }
+
+        $this->dispatcher->dispatch(PostRemovedEntityEvent::NAME, PostRemovedEntityEvent::createEntityEvent($entity));
     }
 
     /**
@@ -137,7 +151,11 @@ abstract class AbstractModel implements ModelInterface
      */
     public function flush()
     {
+        $this->dispatcher->dispatch(PreFlushedEntitiesEvent::NAME, PreFlushedEntitiesEvent::createEntityEvent());
+
         $this->om->flush();
+
+        $this->dispatcher->dispatch(PostFlushedEntitiesEvent::NAME, PostFlushedEntitiesEvent::createEntityEvent());
     }
 
     protected function validateEntityType(EntityInterface $entity)
@@ -153,6 +171,13 @@ abstract class AbstractModel implements ModelInterface
         }
     }
 
+    /**
+     * @internal This calls on self::validateEntityType()
+     * @param EntityInterface $entity
+     *
+     * @throws EntityValidationException
+     * @throws UnknownEntityException
+     */
     protected function validateEntity(EntityInterface $entity)
     {
         $this->validateEntityType($entity);
