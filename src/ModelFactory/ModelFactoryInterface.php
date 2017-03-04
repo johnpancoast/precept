@@ -28,8 +28,6 @@ interface ModelFactoryInterface
      * @param string $modelClass
      *
      * @return EntityModelInterface
-     * @internal param null|EntityInterface $entity
-     *
      */
     public function createModel($modelClass);
 

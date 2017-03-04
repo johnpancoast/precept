@@ -101,6 +101,13 @@ interface ModelInterface
     public function remove(EntityInterface $entity, $flush = false);
 
     /**
+     * Flush (permanently persist) state of object manager
+     *
+     * @return void
+     */
+    public function flush();
+
+    /**
      * Returns the class name of the entity object managed by the repository.
      *
      * This is the same API as doctrine common's ObjectRepository. This allows clients to use models to interact with

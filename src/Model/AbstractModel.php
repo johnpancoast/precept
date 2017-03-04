@@ -112,7 +112,7 @@ abstract class AbstractModel implements ModelInterface
         $this->om->persist($entity);
 
         if ($flush) {
-            $this->om->flush();
+            $this->flush();
         }
 
         return true;
@@ -128,8 +128,16 @@ abstract class AbstractModel implements ModelInterface
         $this->om->remove($entity);
 
         if ($flush) {
-            $this->om->flush();
+            $this->flush();
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function flush()
+    {
+        $this->om->flush();
     }
 
     protected function validateEntityType(EntityInterface $entity)
