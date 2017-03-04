@@ -47,13 +47,13 @@ abstract class AbstractEntityManagerWrapper extends AbstractObjectManagerWrapper
      */
     public function flush()
     {
-        $this->om->getConnection()->beginTransaction();
+        $this->om->beginTransaction();
 
         try {
             parent::flush();
-            $this->om->getConnection()->commit();
+            $this->om->commit();
         } catch (\Exception $e) {
-            $this->om->getConnection()->rollBack();
+            $this->om->rollback();
 
             throw new EntityManagerWrapperTransactionException(
                 sprintf(
