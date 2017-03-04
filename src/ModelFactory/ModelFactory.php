@@ -13,6 +13,7 @@ use Pancoast\Common\Util\Exception\InvalidTypeArgumentException;
 use Pancoast\Common\Util\Exception\NotTraversableException;
 use Pancoast\Common\Util\Validator;
 use Pancoast\Precept\Entity\EntityInterface;
+use Pancoast\Precept\Model\ModelInterface;
 use Pancoast\Precept\ModelFactory\Exception\InvalidEntityException;
 use Pancoast\Precept\ModelFactory\Exception\InvalidModelClassException;
 use Pancoast\Precept\ModelFactory\Exception\UnknownModelException;
@@ -168,12 +169,12 @@ class ModelFactory implements ModelFactoryInterface
     {
         Validator::validateType($modelClass, 'class');
 
-        if (!is_subclass_of($modelClass, EntityModelInterface::class)) {
+        if (!is_subclass_of($modelClass, ModelInterface::class)) {
             throw new InvalidModelClassException(
                 sprintf(
                     'AbstractModel class "%s" must be an instance of %s',
                     $modelClass,
-                    EntityModelInterface::class
+                    ModelInterface::class
                 )
             );
         }
