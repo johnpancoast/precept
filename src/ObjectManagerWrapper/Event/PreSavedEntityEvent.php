@@ -16,5 +16,5 @@ namespace Pancoast\Precept\ObjectManagerWrapper\Event;
  */
 class PreSavedEntityEvent extends EntityEvent
 {
-    const NAME = 'precept.model.pre_saved_entity';
+    const NAME = 'precept.om.pre_saved_entity';
 }

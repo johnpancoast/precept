@@ -49,11 +49,11 @@ abstract class AbstractEntityManagerWrapper extends AbstractObjectManagerWrapper
      */
     public function flush()
     {
+        $this->dispatcher->dispatch(PreFlushedEntitiesEvent::NAME, new PreFlushedEntitiesEvent());
+
         $this->om->beginTransaction();
 
         try {
-            $this->dispatcher->dispatch(PreFlushedEntitiesEvent::NAME, new PreFlushedEntitiesEvent());
-
             $this->om->flush();
             $this->om->commit();
         } catch (\Exception $e) {

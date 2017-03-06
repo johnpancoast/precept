@@ -16,5 +16,5 @@ namespace Pancoast\Precept\ObjectManagerWrapper\Event;
  */
 class PostRemovedEntityEvent extends EntityEvent
 {
-    const NAME = 'precept.model.post_removed_entity';
+    const NAME = 'precept.om.post_removed_entity';
 }

@@ -8,7 +8,7 @@
 namespace Pancoast\Precept\ObjectManagerWrapper\Event;
 
 /**
- * An event dispatched before a flush operation
+ * An event dispatched before (during) a flush operation
  *
  * This will be dispatched while still inside of a transaction. Exceptions thrown will cause the transaction to be
  * rolled back.
@@ -17,5 +17,5 @@ namespace Pancoast\Precept\ObjectManagerWrapper\Event;
  */
 class PreFlushedEntitiesEvent extends EntityEvent
 {
-    const NAME = 'precept.model.pre_flushed_entities';
+    const NAME = 'precept.om.pre_flushed_entities';
 }

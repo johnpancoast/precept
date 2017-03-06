@@ -23,4 +23,11 @@ interface EntityEventInterface
      * @return null|object Entity object
      */
     public function getEntity();
+
+    /**
+     * Get event name
+     *
+     * @return string
+     */
+    public function getName();
 }

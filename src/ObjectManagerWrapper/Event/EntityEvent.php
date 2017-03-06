@@ -45,4 +45,12 @@ class EntityEvent extends Event implements EntityEventInterface
     {
         return $this->entity;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return static::NAME;
+    }
 }
