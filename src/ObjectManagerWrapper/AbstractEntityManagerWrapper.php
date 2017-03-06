@@ -8,6 +8,8 @@
 namespace Pancoast\Precept\ObjectManagerWrapper;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PostFlushedEntitiesEvent;
+use Pancoast\Precept\ObjectManagerWrapper\Event\PreFlushedEntitiesEvent;
 use Pancoast\Precept\ObjectManagerWrapper\Exception\EntityManagerWrapperTransactionException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -50,7 +52,9 @@ abstract class AbstractEntityManagerWrapper extends AbstractObjectManagerWrapper
         $this->om->beginTransaction();
 
         try {
-            parent::flush();
+            $this->dispatcher->dispatch(PreFlushedEntitiesEvent::NAME, new PreFlushedEntitiesEvent());
+
+            $this->om->flush();
             $this->om->commit();
         } catch (\Exception $e) {
             $this->om->rollback();
@@ -64,5 +68,7 @@ abstract class AbstractEntityManagerWrapper extends AbstractObjectManagerWrapper
                 $e
             );
         }
+
+        $this->dispatcher->dispatch(PostFlushedEntitiesEvent::NAME, new PostFlushedEntitiesEvent());
     }
 }
